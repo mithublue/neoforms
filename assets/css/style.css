@@ -1,0 +1,242 @@
+.field-panel{
+    position: absolute;
+    right: 0;
+    left:0;
+    bottom: -10px;
+    text-align: center;
+    margin: 10px 0;
+}
+.row-panel a,.field-panel a{
+    border: 1px solid #ccc;
+    padding: 5px 14px;
+    text-decoration: none;
+    color: #111;
+    border-radius: 3px;
+    display: inline-block;
+    margin-bottom: 5px;
+}
+.neoforms_btn-add_row{
+    border: 1px solid #ccc;
+    padding: 5px 14px;
+    text-decoration: none;
+    color: #111;
+    border-radius: 3px;
+    display: inline-block;
+    margin-bottom: 5px;
+}
+.neoforms_btn-add_tab{
+    border: 1px solid #ccc;
+    padding: 5px 14px;
+    text-decoration: none;
+    color: #111;
+    border-radius: 3px;
+    display: inline-block;
+    margin-bottom: 5px;
+}
+.neoforms_center{
+    text-align: center;
+}
+.neoforms_btn-flat{
+    border: 1px solid #ccc;
+    padding: 5px 14px;
+    text-decoration: none;
+    color: #111;
+    border-radius: 3px;
+    display: inline-block;
+}
+.neoforms_left{
+    text-align: right;
+}
+.neoforms_right{
+    text-align: right;
+}
+.neoforms_dib{
+    display: inline-block;
+}
+.neoforms_db{
+    display: block;
+}
+.field-panel a:hover{
+    background: #cccccc;
+    color: #ffffff;
+}
+.field-panel-list{
+    position: absolute;
+    z-index: 9999999;
+    padding: 5px;
+    right: 0;
+    left: 0;
+}
+.field-panel-list a{
+    position: absolute;
+    right:5px;
+}
+.field-panel-list ul{
+    margin:0;
+    padding:0;
+}
+.field-panel-list li {
+    list-style: none;
+    float: left;
+    /*border: 1px solid #ddd;*/
+    margin: 2px;
+    cursor: pointer;
+    text-align: center;
+    /*padding: 5px 10px;*/
+    /*border-radius: 3px;*/
+}
+.field-panel-list li:hover{
+    /*background: #cccccc;
+    color: #ffffff;*/
+}
+.el-button{
+    text-decoration: none;
+}
+/*** Edit ***/
+.neoforms_form_builder_panel{
+    padding-bottom: 500px;
+}
+.neoforms-edit-mode{
+    position: relative;
+    z-index:0;
+}
+.neoforms-edit-mode .focused_row{
+    border: 1px solid #CCCCCC;
+    margin-bottom: 10px;
+}
+.neoforms-edit-mode .el-row{
+
+}
+.neoforms-edit-mode .focused_row .el-row{
+    padding: 5px;
+    min-height:50px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding-bottom: 50px;
+}
+.neoforms-edit-mode .focused_row .input-col{
+    position: relative;
+    z-index:999999;
+}
+.neoforms-edit-mode .input-col a{
+    text-decoration: none;
+    padding: 5px 11px;
+    background: #333;
+    color: #fff;
+}
+.neoforms_input_panel{
+    position: absolute;
+    text-align: center;
+    right: 0;
+    left: 0;
+    bottom: -15px;
+}
+.neoforms_input_panel a{
+    padding: 5px 15px;
+    display: inline-block;
+    border-radius: 3px;
+}
+.neoforms_input_panel .neoforms_grid_panel{
+    position: absolute;
+    text-align: center;
+    right: 0;
+    left: 0;
+    bottom: -20px;
+    background: #ffffff;
+    padding: 5px;
+    border: 1px solid #ddd;
+    display: inline;
+    text-align: center;
+}
+.neoforms_input_panel .neoforms_grid_panel a{
+    padding: 5px 10px;
+    display: inline-block;
+    margin: 2px;
+    border: 1px solid #dddddd;
+}
+/**custom**/
+.neoforms-field-settings-panel{
+    text-align: left;
+    position: absolute;
+    right: 0;
+    left: 0;
+    padding: 10px;
+    overflow: hidden;
+    margin-top: 5px;
+}
+.neoforms-field-settings-panel .el-form-item{
+    margin-bottom: 0;
+}
+.neoforms-field-settings-panel .neoforms-field-settings-action{
+    text-align: right;
+    display: block;
+}
+.neoforms-field-settings-panel .el-form-item__content{
+    padding-right: 5px;
+}
+.neoforms_tab-panel{
+    width: 500px;
+    position: absolute;
+    z-index: 999999;
+    left: 33%;
+}
+.cc-edit-panel{
+    max-height: 400px;
+    overflow-y: scroll;
+}
+.cc-edit-panel .el-col-24{
+    margin-bottom:20px;
+    padding: 0 10px;
+}
+.cc-edit-panel .el-input__inner{
+    margin-top: 10px;
+}
+.cc-edit-panel .el-row{
+    padding: 0;
+    min-height: auto;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+.panel-repeatable{
+    border:1px solid #dddddd;
+    padding:5px;
+}
+.neoforms-menu a{
+    text-decoration: none;
+}
+.neoforms-menu .is-active{
+    background: #409EFF !important;
+    color: #ffffff !important;
+}
+.pro_fields{
+    border: 1px solid #cc0000;
+    padding: 5px;
+    color: #cc0000;
+    padding: 8px 10px !important;
+    border-radius: 5px;
+}
+.pro_fields p.description{
+    color: #cc0000;
+}
+/*common*/
+.neoforms_layout_cornered input[type="text"],
+.neoforms_layout_cornered input[type="email"],
+.neoforms_layout_cornered input[type="url"],
+.neoforms_layout_cornered input[type="password"],
+.neoforms_layout_cornered input[type="search"],
+.neoforms_layout_cornered input[type="number"],
+.neoforms_layout_cornered input[type="tel"],
+.neoforms_layout_cornered input[type="range"],
+.neoforms_layout_cornered input[type="date"],
+.neoforms_layout_cornered input[type="month"],
+.neoforms_layout_cornered input[type="week"],
+.neoforms_layout_cornered input[type="time"],
+.neoforms_layout_cornered input[type="datetime"],
+.neoforms_layout_cornered input[type="datetime-local"],
+.neoforms_layout_cornered input[type="color"],
+.neoforms_layout_cornered textarea{
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+}
+

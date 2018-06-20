@@ -179,6 +179,9 @@ var store_obj = {
             state.is_editing = true;
         },
         unset_is_editing: function (state, {}) {
+            state.focused_col = '';
+            state.focused_row = '';
+            state.editing_mode = false;
             state.is_editing = false;
         },
         defocus_row: function (state, {focused_row}) {

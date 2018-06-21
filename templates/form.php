@@ -430,11 +430,13 @@
         <a href="javascript:" @click="show_grids = true;set_edit_mode();">Resize</a>
         <a href="javascript:" @click="open_settings = !open_settings;toggle_edit_mode();">Settings</a>
         <a href="javascript:" @click="clone_col()"><?php _e( 'Clone Field'); ?></a>
+        <a href="javascript:" @click="copy_col()"><?php _e( 'Copy Field'); ?></a>
         <a href="javascript:" @click="remove_field()">Remove</a>
         <a href="javascript:" class="neo_col_mover" title="<?php _e( 'Move Field'); ?>"><i class="el-icon-more"></i></a>
         <div v-if="open_settings" class="neoforms-field-settings-panel">
             <div class="neoforms_center mb5">
-                <a href="javascript:" class="neoforms_btn-flat" @click="open_settings = false;unset_edit_mode();">Close</a>
+                <a href="javascript:" class="neoforms_btn-flat" @click="open_settings = false;unset_edit_mode();"><?php _e( 'Save', 'neoforms' ); ?></a>
+                <a href="javascript:" class="neoforms_btn-flat" @click="cancel_editing();open_settings = false;unset_edit_mode();"><?php _e( 'Cancel', 'neoforms' ); ?></a>
             </div>
             <el-tabs type="border-card">
                 <template v-for="(formtab,k) in col_formdata_schema">
@@ -445,7 +447,9 @@
             </el-tabs>
         </div>
         <div class="neoforms_grid_panel" v-if="show_grids">
-            <a href="javascript:" v-for="(val,k) in grid_array" @click="resize_col(val)">{{ val }}</a>
+            <a href="javascript:" v-for="(val,k) in grid_array" @click="resize_col(val)"
+            :class="{ active_col_btn:field_data.settings.atts.span == val }"
+            >{{ val }}</a>
             <a href="javascript:" @click="show_grids = false;unset_edit_mode();">x</a>
         </div>
     </div>
@@ -460,24 +464,37 @@
                     show_grids: false,
                     open_settings: false,
                     grid_array: [],
+                    temp_col_formdata: {},
                 };
             },
             methods: {
+                copy_col: function () {
+                    this.$store.dispatch('copy_col',{field_data:this.field_data});
+                },
                 resize_col: function (val) {
                     this.$store.dispatch('resize_col',{col:val});
                 },
                 toggle_edit_mode: function () {
                     if( this.open_settings ) {
                         this.$store.dispatch('set_edit_mode');
+                        this.temp_col_formdata = neoforms_reset_fields(this.col_formdata.s);
                     } else {
                         this.$store.dispatch('unset_edit_mode');
+                        this.temp_col_formdata = {};
                     }
                 },
                 set_edit_mode: function () {
                     this.$store.dispatch('set_edit_mode');
+                    this.temp_col_formdata = neoforms_reset_fields(this.col_formdata.s);
                 },
                 unset_edit_mode: function () {
                     this.$store.dispatch('unset_edit_mode');
+                    this.temp_col_formdata = {};
+                },
+                cancel_editing: function () {
+                    if( Object.keys(this.temp_col_formdata).length ) {
+                        this.col_formdata.s = neoforms_reset_fields( this.temp_col_formdata );
+                    }
                 },
                 remove_field: function () {
                     this.$store.dispatch('remove_field');
@@ -492,7 +509,6 @@
                 },
                 col_formdata: function () {
                     var col_formdata = this.$store.getters.col_formdata;
-
                     return col_formdata;
                 },
                 col_formdata_s: function () {
@@ -512,13 +528,16 @@
     });
 </script>
 <template id="neoforms_row_panel">
-    <div class="row-panel">
+    <div class="row-panel pr">
         <a href="javascript:" @click="show_field_list();set_edit_mode();" v-if="!is_show_field_list"><i class="el-icon-plus"></i> <?php _e( 'Add Field', 'neoforms' ); ?></a>
         <a href="javascript:" @click="hide_field_list();unset_edit_mode();" v-if="is_show_field_list"><i class="el-icon-close"></i> <?php _e( 'Close Panel', 'neoforms' ); ?></a>
         <a href="javascript:" @click="add_row(target_row)" title="Add row"><i class="el-icon-circle-plus-outline"></i> <?php _e( 'Add Row', 'neoforms' ); ?></a>
         <a href="javascript:" @click="clone_row(target_row)" title="Add row"><i class="el-icon-circle-plus"></i> <?php _e( 'Clone Row', 'neoforms' ); ?></a>
         <a href="javascript:" @click="remove_row(target_row)" title="Remove row"><i class="el-icon-delete"></i> <?php _e( 'Remove Row', 'neoforms' ); ?></a>
         <a href="javascript:" class="neo_row_mover" title="<?php _e( 'Move Row'); ?>"><i class="el-icon-more"></i></a>
+        <a href="javascript:" @click="copy_row()"><?php _e( 'Copy Row', 'neoforms' ); ?></a>
+        <a href="javascript:" v-if="copied_row" @click="paste_row()"><?php _e( 'Paste Row', 'neoforms' ); ?></a>
+        <a href="javascript:" v-if="copied_col" @click="paste_col()"><?php _e( 'Paste Field', 'neoforms' ); ?></a>
         <neoforms_field_list :target_row="target_row"></neoforms_field_list>
     </div>
 </template>
@@ -529,10 +548,20 @@
             props:['target_row'],
             data: function () {
                 return {
+                    open_menu: false,
                     open_settings: false
                 }
             },
             methods: {
+                paste_row: function () {
+                    this.$store.dispatch('paste_row',{row_number:this.target_row});
+                },
+                paste_col: function () {
+                    this.$store.dispatch('paste_col',{row_number:this.target_row});
+                },
+                copy_row: function () {
+                    this.$store.dispatch('copy_row',{row_number:this.target_row});
+                },
                 toggle_edit_mode: function () {
                     if( this.open_settings ) {
                         this.$store.dispatch('set_edit_mode');
@@ -563,6 +592,12 @@
                 }
             },
             computed:{
+                copied_row: function () {
+                    return this.$store.getters.copied_row;
+                },
+                copied_col: function () {
+                    return this.$store.getters.copied_col;
+                },
                 is_show_field_list: function () {
                     return this.$store.getters.is_show_field_list === this.target_row;
                 }

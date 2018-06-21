@@ -90,7 +90,9 @@ var store_obj = {
         editing_mode: false,
         grids: 24,
         focused_col: '',
+        copied_col: '',
         focused_row: '',
+        copied_row: '',
         is_show_field_list: '',
 
         global_settings: global_settings,
@@ -171,6 +173,12 @@ var store_obj = {
         },
         form_count: function (state) {
             return state.form_count;
+        },
+        copied_row: function (state) {
+            return state.copied_row;
+        },
+        copied_col: function (state) {
+            return state.copied_col;
         }
     },
     mutations: {
@@ -421,6 +429,20 @@ var store_obj = {
         },
         delete_fields: function (state, {}) {
             state.formdata.field_data = [];
+        },
+        copy_row: function (state, {row_number}) {
+            state.copied_row = neoforms_reset_fields( state.formdata.field_data[row_number] );
+        },
+        paste_row: function (state, {row_number}) {
+            state.formdata.field_data.splice( row_number,0, state.copied_row );
+            state.copied_row = '';
+        },
+        copy_col: function (state, {field_data}) {
+            state.copied_col = neoforms_reset_fields( field_data );
+        },
+        paste_col: function (state, {row_number}) {
+            state.formdata.field_data[state.focused_row].row_formdata.push(state.copied_col);
+            state.copied_col = '';
         }
     },
     actions: {
@@ -516,6 +538,18 @@ var store_obj = {
         },
         clone_col: function (context) {
             context.commit('clone_col',{});
+        },
+        copy_row: function (context,{row_number}) {
+            context.commit('copy_row',{row_number:row_number});
+        },
+        paste_row: function (context, {row_number}) {
+            context.commit('paste_row',{row_number:row_number});
+        },
+        paste_col: function (context, {row_number}) {
+            context.commit('paste_col',{row_number:row_number});
+        },
+        copy_col: function (context, {field_data}) {
+            context.commit('copy_col',{field_data:field_data});
         }
     }
 }

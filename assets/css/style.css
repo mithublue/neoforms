@@ -239,4 +239,9 @@
     -moz-border-radius: 0px;
     border-radius: 0px;
 }
+.active_col_btn{
+    background: #fff !important;
+    color: #000 !important;
+    border: 2px solid #000 !important;
+}
 

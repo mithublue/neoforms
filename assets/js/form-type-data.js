@@ -227,6 +227,86 @@ var neoforms_form_type_data = {
                     },
                     {
                         type: 'input',
+                        inputType: 'text',
+                        preview: {
+                            'label': 'Text',
+                            name: 'text'
+                        },
+                        s:{
+                            required: true,
+                            name: 'subject',
+                            label: 'Subject',
+                            id: '',
+                            class: '',
+                            placeholder: '',
+                            maxlength: '',
+                            value: '',
+                        },
+                        settings:{
+                            atts: {
+                                span: 24
+                            }
+                        },
+                        schema:{
+                            general: {
+                                label: 'General',
+                                fields: [
+                                    {
+                                        model: 'required',
+                                        type : 'input',
+                                        inputType : 'checkbox',
+                                        label : 'Required',
+                                        options : {
+                                            true : 'Required',
+                                        }
+                                    },
+                                    {
+                                        model: "name",
+                                        type: "input",
+                                        inputType: "text",
+                                        label: "Field Name",
+                                    },
+                                    {
+                                        model: "label",
+                                        type: "input",
+                                        inputType: "text",
+                                        label: "Label",
+                                    },
+                                    {
+                                        model: "id",
+                                        type: "input",
+                                        inputType: "text",
+                                        label: "Id",
+                                    },
+                                    {
+                                        model: "class",
+                                        type: "input",
+                                        inputType: "text",
+                                        label: "Class",
+                                    },
+                                ]
+                            },
+                            advanced: {
+                                label: 'Advanced',
+                                fields: [
+                                    {
+                                        model: "placeholder",
+                                        type: "input",
+                                        inputType: "text",
+                                        label: "Placeholder",
+                                    },
+                                    {
+                                        model: "maxlength",
+                                        type: "input",
+                                        inputType: "number",
+                                        label: "Maxlength"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        type: 'input',
                         inputType: 'textarea',
                         preview: {
                             'label': 'Textarea',
@@ -239,8 +319,8 @@ var neoforms_form_type_data = {
                         },
                         s:{
                             required: true,
-                            name: '',
-                            label: 'Label',
+                            name: 'message',
+                            label: 'Message',
                             id: '',
                             class: '',
                             placeholder: '',

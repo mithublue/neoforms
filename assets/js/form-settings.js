@@ -217,9 +217,9 @@ var neoforms_form_settings = {
         label: 'Contact Form Settings',
         s: {
             mail_to: '',
-            email_field: '',
-            subject_field: '',
-            message_field: '',
+            email_field: 'email',
+            subject_field: 'subject',
+            message_field: 'message',
             message_format: ''
         },
         schema: {

@@ -106,4 +106,18 @@ class NeoForms_Functions {
         }
         return false;
     }
+
+    public static function get_submission_occurance ( $submission_id ) {
+	    $neo_submission_times = get_post_meta( $submission_id, 'neo_submission_times', true );
+	    !$neo_submission_times ? $neo_submission_times = 0 : '';
+	    return $neo_submission_times;
+    }
+    /**
+     * Update submission times
+     */
+    public static function update_submission_occurance( $submission_id, $occurance = 1 ) {
+	    $neo_submission_times = get_post_meta( $submission_id, 'neo_submission_times', true );
+	    if( !$neo_submission_times ) $neo_submission_times = 0;
+	    update_post_meta( $submission_id, $neo_submission_times + $occurance );
+    }
 }

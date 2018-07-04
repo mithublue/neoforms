@@ -501,14 +501,12 @@ var field_attr = {
                                 },
                                 change: function (model,parent_model) {
                                     if( model.is_selected ) {
-                                        console.log(parent_model.sel_values);
                                         parent_model.sel_values.push(model.value);
                                     } else {
                                         if( parent_model.sel_values.indexOf(model.value) !== -1 ) {
                                             parent_model.sel_values.splice(parent_model.sel_values.indexOf(model.value),1);
                                         }
                                     }
-                                    console.log(parent_model.sel_values);
                                 }
                             }
                         ]
@@ -682,6 +680,52 @@ var field_attr = {
 
         }
     },
+    password: {
+        s: {
+            value: '12345',
+            maxlength : 100,
+            minlength : 3,
+            retype_password: false
+        },
+        schema: {
+            general: {
+                label: 'General',
+                fields: [
+                    {
+                        model: 'value',
+                        label: 'Default Value',
+                        type: 'input',
+                        inputType: 'text'
+                    }
+                ]
+            },
+            advanced: {
+                label: 'Advanced',
+                fields: [
+                    {
+                        model: 'maxlength',
+                        label: 'Password Length Limit',
+                        type: 'input',
+                        inputType: 'number'
+                    },
+                    {
+                        model: 'minlength',
+                        label: 'Password Minimum Length',
+                        type: 'input',
+                        inputType: 'number'
+                    },
+                    {
+                        model: 'retype_password',
+                        type: 'input',
+                        inputType: 'checkbox',
+                        options: {
+                            true: 'Retype Password'
+                        }
+                    }
+                ]
+            }
+        }
+    },
     //email_address
     email_address: {
         s: {
@@ -715,7 +759,7 @@ var field_attr = {
                         model: 'maxlength',
                         label: 'Email Length Limit',
                         type: 'input',
-                        inputType: 'email'
+                        inputType: 'number'
                     },
                     {
                         model: 'unique_entry',

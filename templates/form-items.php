@@ -293,3 +293,19 @@
            :class="field_data.s.class"
     >
 </template>
+<template v-if="field_data.preview.name == 'password'">
+    <el-input type="password" v-model="field_data.s.value"
+              :name="field_data.s.name"
+              :id="field_data.s.id"
+              :class="field_data.s.class"
+              :maxlength="field_data.s.maxlength"
+              :minlength="field_data.s.minlength"
+              auto-complete="off"></el-input>
+
+    <template v-if="field_data.s.retype_password">
+        <el-input type="password"
+                  :name="field_data.s.name + '_retype'"
+                  placeholder="<?php _e( 'Retype Password', 'neoforms' ); ?>"
+                  auto-complete="off"></el-input>
+    </template>
+</template>

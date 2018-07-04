@@ -40,7 +40,12 @@ class Neoforms_Submission_Process {
 
         if( empty( $this->get_errors() ) ) {
             if( $this->process_form() ) {
-                return true;
+	            /**
+	             * Save number of submission
+	             * in form
+	             */
+            	NeoForms_Functions::update_submission_occurance( $this->postdata['neoform_submission_id'] );
+	            return true;
             }
         }
 
@@ -66,8 +71,6 @@ class Neoforms_Submission_Process {
             return false;
         }
 
-
-
         if( method_exists( $this, 'process_'.$this->form_settings['form_settings']['s']['form_type'] ) ) {
             $process_method = 'process_'.$this->form_settings['form_settings']['s']['form_type'];
             if( $this->{$process_method}() ) {
@@ -75,7 +78,7 @@ class Neoforms_Submission_Process {
             };
             return false;
         } else {
-            return apply_filters( 'neo_process_form', $this->postdata, $this->form_settings, $this );
+            return apply_filters( 'neo_process_form_'.$this->form_settings['form_settings']['s']['form_type'], false, $this->postdata, $this->form_settings, $this );
         }
     }
 
@@ -150,7 +153,7 @@ class Neoforms_Submission_Process {
                          * if data type if
                          * file
                          */
-                        neoforms_pri($_FILES);
+                        //neoforms_pri($_FILES);
                         if( $col_data['preview']['name'] == 'upload' ) {
                             if( $_FILES[$col_data['s']['name']]['error'][0] ) {
                                 $this->set_error( ( isset( $col_data['s']['label'] ) ? $col_data['s']['label'] : $col_data['s']['name'] ) .' is Required ' );

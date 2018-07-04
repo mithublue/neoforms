@@ -97,6 +97,16 @@
                         </el-collapse>
                         <a @click="addItem(model[field.model],field.group)" href="javascript:" class="btn btn-success neoforms_btn-flat">{{ field.add_button_label }}</a>
                     </template>
+                    <template v-if="field.type == 'datetimepicker'">
+                        <label>{{ field.label }}</label>
+                        <div>
+                            <el-date-picker
+                                    v-model="model[field.model]"
+                                    type="datetime"
+                                    placeholder="Select date and time">
+                            </el-date-picker>
+                        </div>
+                    </template>
                 </el-col>
             </template>
         </el-row>

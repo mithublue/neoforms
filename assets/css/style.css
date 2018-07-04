@@ -155,6 +155,29 @@
     border: 1px solid #dddddd;
 }
 /**custom**/
+.neo_entry_single_view table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100% !important;
+    border: 1px solid #ddd !important;
+}
+
+.neo_entry_single_view th, .neo_entry_single_view td {
+    text-align: left;
+    padding: 16px;
+}
+
+.neo_entry_single_view tr:nth-child(even) {
+    background-color: #f2f2f2
+}
+
+.neo_form_type h4{
+    margin-bottom: 10px;
+}
+.neo_form_type h5{
+    margin-top: 0px;
+    margin-bottom: 20px;
+}
 .neoforms-field-settings-panel{
     text-align: left;
     position: absolute;

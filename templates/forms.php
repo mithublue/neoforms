@@ -4,10 +4,22 @@
         <div class="mb10 oh">
             <div class="alignleft">
                 <a href="admin.php?page=neoforms#/forms/form-types" class="el-button el-button"><?php _e( 'Add New', 'neoforms' ); ?></a>
+                <div class="mt10">
+                    <template v-if="selected_ids.length">
+                        <template v-if="status != 'trash'">
+                            <a @click="bulk_delete(1)" href="javascript:" class="el-button el-button--mini el-button--danger"><?php _e('Move to Trash','neoforms'); ?></a>
+                        </template>
+                        <template v-else>
+                            <a @click="bulk_delete(0)" href="javascript:" class="el-button el-button--mini el-button--danger"><?php _e('Bulk Delete','neoforms'); ?></a>
+                        </template>
+                    </template>
+                    <a @click="select_all()" href="javascript:" class="el-button el-button--mini el-button--default"><?php _e( 'Select All', 'neoforms' ); ?></a>
+                    <a v-if="selected_ids.length" @click="deselect_all()" href="javascript:" class="el-button el-button--mini el-button--default"><?php _e( 'Deselect All', 'neoforms' ); ?></a>
+                </div>
             </div>
             <div class="alignright">
-                <a href="javascript:" class="el-button el-button--mini"><i class="el-icon-arrow-left"></i></a>
-                <a href="javascript:" class="el-button el-button--mini"><i class="el-icon-arrow-right"></i></a>
+                <a :href="'#/forms/' + status + '/page/' + ( pagenum > 1 ? pagenum - 1 : pagenum )" class="el-button el-button--mini"><i class="el-icon-arrow-left"></i></a>
+                <a :href="'#/forms/' + status + '/page/' + nextpage" class="el-button el-button--mini"><i class="el-icon-arrow-right"></i></a>
             </div>
         </div>
         <div class="mb10 oh">
@@ -27,6 +39,7 @@
                     label="Title"
                     width="180">
                 <template slot-scope="scope">
+                    <input type="checkbox" v-model="selected_ids" :value="scope.row.ID">
                     <span style="margin-left: 10px">{{ scope.row.post_title }}</span>
                 </template>
             </el-table-column>
@@ -62,7 +75,7 @@
                 title="<?php _e( 'Confirm', 'neoforms' ); ?>"
                 :visible.sync="confirmationVisible"
                 width="30%">
-            <span><?php _e( 'Are you sure to Delete this item ?', 'neoforms' ); ?></span>
+            <span><?php _e( 'Are you sure to delete this item ?', 'neoforms' ); ?></span>
             <span slot="footer" class="dialog-footer">
                 <a v-if="status !== 'trash'" class="el-button el-button--danger" href="javascript:" type="primary" @click="confirmationVisible = false; delete_form(1)"><?php _e( 'Confirm', 'neoforms' ); ?></a>
                 <a v-if="status === 'trash'" class="el-button el-button--danger" href="javascript:" type="primary" @click="confirmationVisible = false; delete_form(0)"><?php _e( 'Confirm', 'neoforms' ); ?></a>
@@ -75,6 +88,7 @@
     var neoforms_forms = {
         data:  function () {
             return {
+                selected_ids: [],
                 toDelete: 0,
                 confirmationVisible: false,
                 post_statuses: JSON.parse('<?php echo json_encode($post_statuses); ?>')
@@ -88,6 +102,22 @@
             }
         },
         methods: {
+            deselect_all:function () {
+                this.selected_ids = [];
+            },
+            select_all: function () {
+                for( var k in this.forms ) {
+                    this.selected_ids.push(this.forms[k].ID);
+                }
+            },
+            bulk_delete: function (soft) {
+                var _this = this;
+                var selected_ids = JSON.stringify(this.selected_ids);
+                this.$store.dispatch('bulk_delete',{soft:soft, ids: selected_ids, callback: function () {
+                    _this.fetchData();
+                } } );
+                this.selected_ids = [];
+            },
             update_form: function (status,form_id) {
                 var _this = this;
                 this.$store.dispatch('update_form',{status:status,form_id: form_id,callback:function () {

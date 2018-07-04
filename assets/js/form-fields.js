@@ -153,6 +153,20 @@ var formFields = [
             }
         }
     },
+    //password
+    {
+        type: 'input',
+        inputType: 'password',
+        preview: {
+            'label': 'Password',
+            name: 'password'
+        },
+        settings:{
+            atts: {
+                span: 12
+            }
+        }
+    },
     //hidden_field
     {
         type: 'input',

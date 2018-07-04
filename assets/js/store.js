@@ -82,9 +82,12 @@ var store_obj = {
         },
         field_attr: field_attr,
         form_count: 0,
+        entry_count: 0,
         current_page: 0,
         forms: [],
+        entries: [],
         form: {},
+        entry: {},
         edit_form_id: 0,
         is_editing: true,
         editing_mode: false,
@@ -150,7 +153,6 @@ var store_obj = {
             return state.editing_mode;
         },
         col_formdata: function (state) {
-            console.log('qqq');
             return state.formdata.field_data[state.focused_row].row_formdata[state.focused_col];
         },
         col_formdata_s: function (state) {
@@ -165,14 +167,26 @@ var store_obj = {
         forms: function (state) {
             return state.forms;
         },
+        entries: function (state) {
+            return state.entries;
+        },
+        entry: function (state) {
+            return state.entry;
+        },
         form: function (state) {
             return state.form;
+        },
+        entry: function (state) {
+            return state.entry;
         },
         current_page: function (state) {
             return state.current_page;
         },
         form_count: function (state) {
             return state.form_count;
+        },
+        entry_count: function (state) {
+            return state.entry_count;
         },
         copied_row: function (state) {
             return state.copied_row;
@@ -239,9 +253,9 @@ var store_obj = {
             state.editing_mode = false;
         },
         populate_form_type_data: function (state, {form_data,form_title}) {
+            var _this = this;
             state.form_title = form_title;
             state.formdata = neoforms_reset_fields(form_data);
-            console.log(state.formdata);
         },
         update_form: function (state, {status, form_id, callback}) {
             var edit_form_id = ( typeof form_id !== 'undefined' ) ? form_id : ( state.edit_form_id ? state.edit_form_id : 0);
@@ -285,6 +299,44 @@ var store_obj = {
                 }
             )
         },
+        update_entry: function (state, {status, entry_id, callback}) {
+            if( typeof entry_id === 'undefined' ) return;
+            var edit_entry_id = ( typeof entry_id !== 'undefined' ) ? entry_id : 0;
+
+            jQuery.post(
+                ajaxurl,
+                {
+                    action: 'neoforms_update_entry',
+                    status: status,
+                    entry_id: edit_entry_id,
+                },
+                function (data) {
+                    if(data.success) {
+                        if( typeof callback == 'function' ) {
+                            callback();
+                        }
+                        state.notice = {
+                            type: 'success',
+                            header: 'Success',
+                            msg: ''
+                        };
+                    } else {
+                        state.notice = {
+                            type: 'error',
+                            header: 'Error',
+                            msg: 'Something went wrong !'
+                        };
+                    }
+                    setTimeout(function () {
+                        state.notice = {
+                            type: '',
+                            header: '',
+                            msg: ''
+                        }
+                    },3000);
+                }
+            )
+        },
         get_forms: function (state, {page, status}) {
             jQuery.post(
                 ajaxurl,
@@ -303,7 +355,26 @@ var store_obj = {
                 }
             )
         },
-        get_form: function (state, {id}) {
+        get_entries: function (state, {page, status, form_type}) {
+            jQuery.post(
+                ajaxurl,
+                {
+                    action: 'neoforms_get_entries',
+                    page: page,
+                    status: status,
+                    form_type: form_type,
+                },
+                function (data) {
+                    if(data.success) {
+                        //state.
+                        state.current_page = page;
+                        state.entries = data.data.entries;
+                        state.entry_count = data.data.counts
+                    }
+                }
+            )
+        },
+        get_form: function (state, {id, callback}) {
             jQuery.post(
                 ajaxurl,
                 {
@@ -323,7 +394,25 @@ var store_obj = {
                         for( tabname in data.data.form_settings ) {
                             state.form_settings[tabname].s = data.data.form_settings[tabname].s;
                         }
+
+                        if( typeof callback === 'function' ) {
+                            callback();
+                        }
                         //state.form_settings.s = data.data.form_settings.s ? data.data.form_settings.s : {};
+                    }
+                }
+            )
+        },
+        get_entry: function (state, {id}) {
+            jQuery.post(
+                ajaxurl,
+                {
+                    action: 'neoforms_get_entry',
+                    id: id
+                },
+                function (data) {
+                    if(data.success) {
+                        state.entry = data.data.entry;
                     }
                 }
             )
@@ -356,6 +445,33 @@ var store_obj = {
                 }
             )
         },
+        delete_entry: function (state, {id, soft}) {
+            var trashDelete;
+            if( typeof soft === 'undefined' ) {
+                soft = 1;
+            }
+            trashDelete = soft;
+
+            jQuery.post(
+                ajaxurl,
+                {
+                    action: 'neoforms_delete_entry',
+                    id: id,
+                    trashDelete: trashDelete
+                },
+                function (data) {
+                    if(data.success) {
+                        var item = state.entries.filter(function (item,index) {
+                            return item.ID == id
+                        });
+
+                        if( item.length ) {
+                            state.entries.splice(state.entries.indexOf(item[0]),1);
+                        }
+                    }
+                }
+            )
+        },
         reset_all: function (state, {}) {
             state.focused_row = '';
             state.focused_col = '';
@@ -365,7 +481,7 @@ var store_obj = {
             state.edit_form_id = 0;
             state.is_show_field_list = '';
             state.editing_mode = false;
-            state.form_settings = neoforms_reset_fields(neoforms_form_settings);
+            //state.form_settings = neoforms_reset_fields(neoforms_form_settings);
         },
         save_global_settings: function (state, {}) {
             jQuery.post(
@@ -443,6 +559,26 @@ var store_obj = {
         paste_col: function (state, {row_number}) {
             state.formdata.field_data[state.focused_row].row_formdata.push(state.copied_col);
             state.copied_col = '';
+        },
+        set_form_type: function (state, {form_type}) {
+            state.form_settings.form_settings.s.form_type = form_type;
+        },
+        bulk_delete: function (state, {soft,ids,callback}) {
+            jQuery.post(
+                ajaxurl,
+                {
+                    action: 'neoforms_buck_delete',
+                    soft: soft,
+                    ids: ids
+                },
+                function (data) {
+                    if( data.success ) {
+                        if( typeof callback !== 'undefined' ) {
+                            callback();
+                        }
+                    }
+                }
+            )
         }
     },
     actions: {
@@ -508,13 +644,22 @@ var store_obj = {
         update_form: function (context, {status, form_id, callback}) {
             context.commit('update_form',{status:status, form_id: form_id, callback: callback});
         },
+        update_entry: function (context, {status, entry_id, callback}) {
+            context.commit('update_entry',{status:status, entry_id: entry_id, callback: callback});
+        },
         //get all forms
         get_forms: function (context, {page, status}) {
             context.commit('get_forms',{page:page, status: status});
         },
+        get_entries: function (context, {page, status, form_type}) {
+            context.commit('get_entries',{page:page, status: status, form_type: form_type});
+        },
         //get form
-        get_form: function (context, {id}) {
-            context.commit('get_form',{id:id});
+        get_form: function (context, {id, callback}) {
+            context.commit('get_form',{id:id, callback: callback});
+        },
+        get_entry: function (context, {id}) {
+            context.commit('get_entry',{id:id});
         },
         delete_form: function (context, {form_id, soft}) {
             context.commit('delete_form',{form_id:form_id, soft: soft});
@@ -550,6 +695,15 @@ var store_obj = {
         },
         copy_col: function (context, {field_data}) {
             context.commit('copy_col',{field_data:field_data});
+        },
+        delete_entry: function (context, {id, soft}) {
+            context.commit('delete_entry',{id:id, soft: soft});
+        },
+        set_form_type: function (context, {form_type}) {
+            context.commit('set_form_type',{form_type:form_type});
+        },
+        bulk_delete: function (context, {soft,ids,callback}) {
+            context.commit('bulk_delete',{soft:soft,ids:ids,callback:callback});
         }
     }
 }

@@ -104,6 +104,7 @@
                 this.$store.dispatch( 'delete_fields' );
             },
             fetchData: function () {
+                var self = this;
                 //reset all so that, any settings changed is not left
                 this.$store.dispatch('reset_all');
 
@@ -116,11 +117,18 @@
                                 form_title : neoforms_form_type_data[this.$route.params.form_type].label
                             });
                     }
+                    this.update_form('publish');
                 }
 
                 //if edit form
                 else if ( typeof this.$route.params.form_id !== 'undefined' ) {
-                    this.$store.dispatch('get_form',{id:this.$route.params.form_id})
+                    this.$store.dispatch('get_form',{id:this.$route.params.form_id, callback: function () {
+                        return;
+                        /*neo_reset_sortable_row(self, self.is_multistep);
+                        setTimeout(function () {
+                            neo_reset_sortable_field(self, self.is_multistep);
+                        },1);*/
+                    }});
                 }
             }
         },
@@ -129,6 +137,9 @@
                 return this.$store.getters.form;
             },
             form_settings: function () {
+                if( typeof this.$route.params.form_type !== 'undefined' ) {
+                    this.$store.dispatch( 'set_form_type', {form_type: this.$route.params.form_type});
+                }
                 return this.$store.getters.form_settings;
             },
             form_id: function () {
@@ -238,7 +249,7 @@
             <el-form ref="form" label-width="120px" method="post">
                 <div class="neoforms_db neoforms_center pr">
                     <template v-if="is_editing">
-                        <a href="javascript:" @click="add_row()" class="neoforms_btn-add_row" title="Add row"><i class="el-icon-circle-plus-outline"></i> <?php _e( 'Add Row', 'neoforms' ); ?></a>
+                        <a href="javascript:" @click="add_row()" class="neoforms_btn-add_row" title="Add row"><i class="el-icon-circle-plus-outline"></i> <?php _e( 'Add Placeholder', 'neoforms' ); ?></a>
                     </template>
                     <a href="javascript:" @click="set_is_editing()" v-if="!is_editing" class="neoforms_btn-add_row" title="Add row"><i class="el-icon-edit-outline"></i> <?php _e( 'Edit', 'neoforms' ); ?></a>
                     <a href="javascript:" @click="unset_is_editing()" v-if="is_editing" class="neoforms_btn-add_row" title="Add row"><i class="el-icon-view"></i> <?php _e( 'Preview', 'neoforms' ); ?></a>
@@ -317,6 +328,8 @@
                 },
                 field_data: {
                     get: function () {
+                        var self = this;
+                        neo_reset_sortable(self, self.is_multistep);
                         return this.$store.getters.field_data;
                     },
                     set: function (value) {
@@ -366,7 +379,9 @@
             },
             mounted: function () {
                 var self = this;
-                neo_reset_sortable(self, self.is_multistep);
+                setTimeout(function () {
+
+                },500);
             }
         });
     });
@@ -531,13 +546,13 @@
     <div class="row-panel pr">
         <a href="javascript:" @click="show_field_list();set_edit_mode();" v-if="!is_show_field_list"><i class="el-icon-plus"></i> <?php _e( 'Add Field', 'neoforms' ); ?></a>
         <a href="javascript:" @click="hide_field_list();unset_edit_mode();" v-if="is_show_field_list"><i class="el-icon-close"></i> <?php _e( 'Close Panel', 'neoforms' ); ?></a>
-        <a href="javascript:" @click="add_row(target_row)" title="Add row"><i class="el-icon-circle-plus-outline"></i> <?php _e( 'Add Row', 'neoforms' ); ?></a>
-        <a href="javascript:" @click="clone_row(target_row)" title="Add row"><i class="el-icon-circle-plus"></i> <?php _e( 'Clone Row', 'neoforms' ); ?></a>
-        <a href="javascript:" @click="remove_row(target_row)" title="Remove row"><i class="el-icon-delete"></i> <?php _e( 'Remove Row', 'neoforms' ); ?></a>
-        <a href="javascript:" class="neo_row_mover" title="<?php _e( 'Move Row'); ?>"><i class="el-icon-more"></i></a>
-        <a href="javascript:" @click="copy_row()"><?php _e( 'Copy Row', 'neoforms' ); ?></a>
-        <a href="javascript:" v-if="copied_row" @click="paste_row()"><?php _e( 'Paste Row', 'neoforms' ); ?></a>
+        <a href="javascript:" @click="add_row(target_row)" title="Add row"><i class="el-icon-circle-plus-outline"></i> <?php _e( 'Add Placeholder', 'neoforms' ); ?></a>
+        <a href="javascript:" @click="clone_row(target_row)" title="Add row"><i class="el-icon-circle-plus"></i> <?php _e( 'Clone Placeholder', 'neoforms' ); ?></a>
+        <a href="javascript:" @click="copy_row()"><?php _e( 'Copy Placeholder', 'neoforms' ); ?></a>
+        <a href="javascript:" v-if="copied_row" @click="paste_row()"><?php _e( 'Paste Placeholder', 'neoforms' ); ?></a>
         <a href="javascript:" v-if="copied_col" @click="paste_col()"><?php _e( 'Paste Field', 'neoforms' ); ?></a>
+        <a href="javascript:" @click="remove_row(target_row)" title="Remove row"><i class="el-icon-delete"></i> <?php _e( 'Remove Placeholder', 'neoforms' ); ?></a>
+        <a href="javascript:" class="neo_row_mover" title="<?php _e( 'Move Placeholder'); ?>"><i class="el-icon-more"></i></a>
         <neoforms_field_list :target_row="target_row"></neoforms_field_list>
     </div>
 </template>

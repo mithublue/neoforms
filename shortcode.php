@@ -24,8 +24,44 @@ class NeoForms_Shortcode_Handler {
 
         if( get_post_status($form->ID) !== 'publish' ) return;
 
-        $this->formdata[$atts['id']] = NeoForms_Functions::get_formdata($atts['id']);
-        $this->form_settings[$atts['id']] = NeoForms_Functions::get_form_settings($atts['id']);
+	    $this->form_settings[$atts['id']] = json_decode( base64_decode( NeoForms_Functions::get_form_settings($atts['id']) ), true ) ;
+        $form_settings = $this->form_settings[$atts['id']];//json_decode( base64_decode( $this->form_settings[$atts['id']] ), true );
+
+	    /**
+	     * Form restriction
+	     */
+	    $is_restricted = 0;
+
+	    if( $form_settings['form_restriction']['s']['is_scheduled'] ) {
+		    if( $form_settings['form_restriction']['s']['schedule_from'] && $form_settings['form_restriction']['s']['schedule_to'] ) {
+		        if( time() < $form_settings['form_restriction']['s']['schedule_from'] || time() > strtotime( $form_settings['form_restriction']['s']['schedule_to'] ) ) {
+		            $is_restricted = 1;
+			        echo $form_settings['form_restriction']['s']['msg_before_schedule'];
+                }
+            }
+        }
+
+        if( $form_settings['form_restriction']['s']['limit_submission'] ) {
+	        if( $form_settings['form_restriction']['s']['number_of_submission'] >= NeoForms_Functions::get_submission_occurance( $atts['id'] ) ) {
+	            $is_restricted = 1;
+	            echo $form_settings['form_restriction']['s']['limit_break_msg'];
+            }
+        };
+
+	    if( $form_settings['form_restriction']['s']['require_login'] ) {
+	        if( !is_user_logged_in() ) {
+	            $is_restricted = 1;
+		        echo $form_settings['form_restriction']['s']['require_login_msg'];
+            }
+        }
+
+        $is_restricted = apply_filters( 'neoforms_process_form_restriction', $is_restricted, $form_settings );
+
+        if( $is_restricted ) {
+	        return;
+        }
+
+	    $this->formdata[$atts['id']] = apply_filters( 'neo_public_formdata_'.$form_settings['form_settings']['s']['form_type'], NeoForms_Functions::get_formdata($atts['id']), $form_settings );
         ?>
         <div id="neoforms-<?php echo $atts['id']; ?>">
             <?php do_action( 'neo_before_form'); ?>
@@ -49,12 +85,12 @@ class NeoForms_Shortcode_Handler {
                     </el-alert>
                 </template>
             </div>
+	        <?php do_action( 'neo_public_before_form', $this->formdata[$atts['id']], $this->form_settings[$atts['id']] ); ?>
             <div :class="'neoforms_layout_' + form_settings.appearance_settings.s.layout_type">
-                <el-form ref="form" label-width="120px" method="post" enctype="multipart/form-data"> <!--onsubmit="return false;"-->
-                    <?php do_action( 'neo_form_start'); ?>
+                <el-form ref="form" label-width="120px" method="post" enctype="multipart/form-data" onsubmit="return false;"> <!---->
+                    <?php do_action( 'neo_form_start', $this->formdata[$atts['id']], $this->form_settings[$atts['id']] ); ?>
                     <input type="hidden" name="neoform_submission_id" value="<?php echo $atts['id']; ?>">
                     <div>
-                        <?php do_action( 'neo_public_before_form' ); ?>
                         <template v-if="!form_settings.form_settings.s.is_multistep || typeof form_settings.form_settings.s.is_multistep === 'undefined'">
                             <template v-for="(row_data,k) in formdata.field_data">
                                 <neoforms_row :relations="relations" v-if="row_data.type == 'row'" :row_number="k" :form_data="row_data.row_formdata"></neoforms_row>
@@ -64,12 +100,10 @@ class NeoForms_Shortcode_Handler {
                             </el-form-item>
                         </template>
                     </div>
-
-
-                    <?php do_action( 'neo_form_end'); ?>
+                    <?php do_action( 'neo_form_end', $this->formdata[$atts['id']], $this->form_settings[$atts['id']] ); ?>
                 </el-form>
             </div>
-            <?php do_action( 'neo_after_form'); ?>
+            <?php do_action( 'neo_after_form', $this->formdata[$atts['id']], $this->form_settings[$atts['id']] ); ?>
         </div>
         <?php
     }
@@ -153,7 +187,7 @@ class NeoForms_Shortcode_Handler {
                                                     _this.errors = [];
                                                 }
                                             }
-                                        )
+                                        );
                                     }(jQuery));
                                 }
                             },
@@ -282,7 +316,7 @@ class NeoForms_Shortcode_Handler {
                             } ,
                             created: function () {
                                 this.formdata = neoforms_parse('<?php echo $formdata; ?>');
-                                this.form_settings = neoforms_parse('<?php echo $this->form_settings[$id]; ?>');
+                                this.form_settings = neoforms_parse('<?php echo base64_encode( json_encode( $this->form_settings[$id] ) ); ?>');
                             }
                         });
                     });

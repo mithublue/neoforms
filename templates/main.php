@@ -11,4 +11,6 @@ include_once 'forms.php';
 include_once 'form.php';
 include_once 'edit-form.php';
 include_once 'settings.php';
+include_once 'entries.php';
+include_once 'entry.php';
 do_action('neoforms_admin_templates' );

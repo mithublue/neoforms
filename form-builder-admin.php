@@ -34,7 +34,8 @@ class NeoForms_Admin {
             $submenu['neoforms'][] = array( __( 'All Forms', 'neoforms' ), $capability, 'admin.php?page=neoforms#/' );
             $submenu['neoforms'][] = array( __( 'Add Form', 'neoforms' ), $capability, 'admin.php?page=neoforms#/forms/form-types' );
 
-            do_action( 'neoforms_admin_menu', $hook, $capability );
+            $submenu = apply_filters( 'neoforms_admin_menu', $submenu, $hook, $capability );
+            do_action( 'neoforms_admin_menu', $submenu, $hook, $capability );
         }
 
         // only admins should see the settings page

@@ -1,13 +1,14 @@
-const neo_hooks = {};
+var neo_hooks = {};
 
 function neo_add_filter( filtername, anonymus_function ) {
     if( typeof neo_hooks[filtername] === 'undefined' ) {
         neo_hooks[filtername] = {};
     }
-    neo_hooks[filtername][Object.keys(neo_hooks).length] = anonymus_function;
+
+    neo_hooks[filtername][Object.keys(neo_hooks[filtername]).length] = anonymus_function;
 }
 
-function  neo_apply_filters (filtername, data) {
+function neo_apply_filters (filtername, data) {
     if( typeof neo_hooks[filtername] !== 'undefined' ) {
         for ( k in neo_hooks[filtername] ) {
             data = neo_hooks[filtername][k](data);
@@ -87,6 +88,8 @@ function neo_make_sortable_row(sortObj,item,self,self_items) {
                 var temp_obj = neoforms_reset_fields( self_items[prev_index] );
                 self_items.splice(prev_index,1);
 
+
+
                 setTimeout(function () {
                     self_items.splice(current_index,0,temp_obj);
                     self.render_field_list = true;
@@ -118,7 +121,7 @@ function neo_make_sortable_field(sortObj,item,self,self_items) {
                 var current_row_index = $(ui.item).closest('.ui-neoforms_row').attr('target_row');
 
                 var temp_obj = neoforms_reset_fields( self_items[prev_row_index].row_formdata[prev_index] );
-                //console.log(prev_index);
+
                 self_items[prev_row_index].row_formdata.splice(prev_index,1);
                 setTimeout(function () {
                     self_items[current_row_index].row_formdata.splice(current_index,0,temp_obj);
@@ -135,11 +138,37 @@ function neo_make_sortable_field(sortObj,item,self,self_items) {
 
 function neo_reset_sortable( self, is_multistep ) {
     if( !is_multistep ) {
-        neo_make_sortable_row('#ui-neoforms_builder_ground','.ui-neoforms_row',self,self.field_data);
-        neo_make_sortable_field('.ui-neoforms_row','.ui-neoforms_col',self,self.field_data);
+        setTimeout(function () {
+            neo_make_sortable_row('#ui-neoforms_builder_ground','.ui-neoforms_row',self,self.field_data);
+            neo_make_sortable_field('.ui-neoforms_row','.ui-neoforms_col',self,self.field_data);
+        },1);
     } else {
         for( var s in self.field_data ) {
             neo_make_sortable_row('#ui-neoforms_builder_ground','.ui-neoforms_row',self,self.field_data[s].step_formdata);
+            neo_make_sortable_field('.ui-neoforms_row','.ui-neoforms_col',self,self.field_data[s].step_formdata);
+        }
+    }
+}
+
+function neo_reset_sortable_row( self, is_multistep ) {
+    if( !is_multistep ) {
+        setTimeout(function () {
+            neo_make_sortable_row('#ui-neoforms_builder_ground','.ui-neoforms_row',self,self.field_data);
+        },1);
+    } else {
+        for( var s in self.field_data ) {
+            neo_make_sortable_row('#ui-neoforms_builder_ground','.ui-neoforms_row',self,self.field_data[s].step_formdata);
+        }
+    }
+}
+
+function neo_reset_sortable_field( self, is_multistep ) {
+    if( !is_multistep ) {
+        setTimeout(function () {
+            neo_make_sortable_field('.ui-neoforms_row','.ui-neoforms_col',self,self.field_data);
+        },1);
+    } else {
+        for( var s in self.field_data ) {
             neo_make_sortable_field('.ui-neoforms_row','.ui-neoforms_col',self,self.field_data[s].step_formdata);
         }
     }

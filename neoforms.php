@@ -49,9 +49,12 @@ Class NeoForms_Init {
         include_once 'functions.php';
         include_once 'shortcode.php';
         include_once 'submission-process.php';
+        include_once 'data.php';
 
         if( NeoForms_Functions::is_pro() ) {
             include_once 'pro/loader.php';
+        } else {
+            include_once 'pro-data.php';
         }
     }
 
@@ -79,6 +82,50 @@ Class NeoForms_Init {
 
         register_post_type( 'neoforms_form', array(
             'label'           => __( 'Forms', 'neoforms' ),
+            'public'          => false,
+            'show_ui'         => true,
+            'show_in_menu'    => false,
+            'capability_type' => 'post',
+            'hierarchical'    => false,
+            'query_var'       => false,
+            'supports'        => array('title'),
+            'capabilities' => array(
+                'publish_posts'       => $capability,
+                'edit_posts'          => $capability,
+                'edit_others_posts'   => $capability,
+                'delete_posts'        => $capability,
+                'delete_others_posts' => $capability,
+                'read_private_posts'  => $capability,
+                'edit_post'           => $capability,
+                'delete_post'         => $capability,
+                'read_post'           => $capability,
+            ),
+            'labels' => $labels,
+        ) );
+
+        /**
+         * Entry post type
+         */
+        $labels = array(
+            'name'                  => _x('Entry', 'post type general name', 'neoforms'),
+            'singular_name'         => _x('Entry', 'post type singular name','neoforms'),
+            'menu_name'             => _x( 'Entry', 'admin menu', 'neoforms'),
+            'name_admin_bar'        => _x( 'Entry', 'add new on admin bar', 'neoforms'),
+            'add_new'               => _x('Add New Entry', 'Form' , 'neoforms' ),
+            'add_new_item'          => __('Add New Entry', 'neoforms'),
+            'edit_item'             => __('Edit Entry', 'neoforms'),
+            'new_item'              => __('New Entry' , 'neoforms' ),
+            'view_item'             => __('View Entry', 'neoforms' ),
+            'all_items'             => __( 'All Entry', 'neoforms' ),
+            'search_items'          => __('Search Entry', 'neoforms' ),
+            'not_found'             =>  __('Nothing found', 'neoforms' ),
+            'not_found_in_trash'    => __('Nothing found in Trash', 'neoforms' ),
+            'parent_item_colon'     => '',
+
+        );
+
+        register_post_type( 'neoforms_entry', array(
+            'label'           => __( 'Entries', 'neoforms' ),
             'public'          => false,
             'show_ui'         => true,
             'show_in_menu'    => false,

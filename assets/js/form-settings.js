@@ -9,7 +9,7 @@ var neoforms_form_settings = {
         for: '',
         label: 'Form Settings',
         s: {
-            form_type: 'contact',
+            form_type: '',
             redirect_to: '',
             submit_text: 'Submit',
             page_id: '',
@@ -115,8 +115,8 @@ var neoforms_form_settings = {
                 },
                 {
                     model: 'schedule_from',
-                    type: 'input',
-                    inputType: 'text',
+                    type: 'datetimepicker',
+                    //inputType: '',
                     label: 'Schedule Start Date',
                     desc: 'The date when the form will be accessible from',
                     visible: function (model) {

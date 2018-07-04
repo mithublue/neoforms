@@ -41,108 +41,6 @@ var neoforms_form_type_data = {
                             atts: {
                                 span: 12
                             }
-                        },
-                        schema:{
-                            general: {
-                                label: 'General',
-                                fields: [
-                                    {
-                                        model: 'required',
-                                        type : 'input',
-                                        inputType : 'checkbox',
-                                        label : 'Required',
-                                        options : {
-                                            true : 'Required',
-                                        }
-                                    },
-                                    {
-                                        model: "name",
-                                        type: "input",
-                                        inputType: "text",
-                                        label: "Field Name",
-                                    },
-                                    {
-                                        model: "label",
-                                        type: "input",
-                                        inputType: "text",
-                                        label: "Label",
-                                    },
-                                    {
-                                        model: "id",
-                                        type: "input",
-                                        inputType: "text",
-                                        label: "Id",
-                                    },
-                                    {
-                                        model: "class",
-                                        type: "input",
-                                        inputType: "text",
-                                        label: "Class",
-                                    },
-                                ]
-                            },
-                            advanced: {
-                                label: 'Advanced',
-                                fields: [
-                                    {
-                                        model: "placeholder",
-                                        type: "input",
-                                        inputType: "text",
-                                        label: "Placeholder",
-                                    },
-                                    {
-                                        model: "maxlength",
-                                        type: "input",
-                                        inputType: "number",
-                                        label: "Maxlength"
-                                    },
-
-                                    {
-                                        model: 'has_relation',
-                                        type: 'input',
-                                        inputType: 'checkbox',
-                                        options : {
-                                            true : 'Has Relation',
-                                        },
-                                        change: function (model) {
-                                            console.log(model);
-                                        }
-                                    },
-                                    {
-                                        model: 'relation',
-                                        type : 'repeatable',
-                                        label : 'This field will be visible if ...',
-                                        group: [
-                                            {
-                                                model: 'field',
-                                                label: 'The value of the field',
-                                                type: 'select',
-                                                options: {},
-                                                change: function (model) {
-                                                }
-                                            },
-                                            {
-                                                model: 'value',
-                                                label: 'Is ',
-                                                type: 'input',
-                                                inputType: 'text'
-                                            },
-                                            {
-                                                model: 'relation_type',
-                                                label: 'And/Or',
-                                                type: 'select',
-                                                options: {
-                                                    or: 'OR',
-                                                    and: 'AND'
-                                                }
-                                            }
-                                        ],
-                                        visible: function (model) {
-                                            return model.has_relation === true;
-                                        }
-                                    }
-                                ]
-                            }
                         }
                     },
                     {
@@ -161,67 +59,16 @@ var neoforms_form_type_data = {
                             placeholder: '',
                             maxlength: '',
                             value: '',
+                            has_relation: false,
+                            relation: [{
+                                field: '',
+                                value : '',
+                                relation_type: 'and'
+                            }],
                         },
                         settings:{
                             atts: {
                                 span: 12
-                            }
-                        },
-                        schema:{
-                            general: {
-                                label: 'General',
-                                fields: [
-                                    {
-                                        model: 'required',
-                                        type : 'input',
-                                        inputType : 'checkbox',
-                                        label : 'Required',
-                                        options : {
-                                            true : 'Required',
-                                        }
-                                    },
-                                    {
-                                        model: "name",
-                                        type: "input",
-                                        inputType: "text",
-                                        label: "Field Name",
-                                    },
-                                    {
-                                        model: "label",
-                                        type: "input",
-                                        inputType: "text",
-                                        label: "Label",
-                                    },
-                                    {
-                                        model: "id",
-                                        type: "input",
-                                        inputType: "text",
-                                        label: "Id",
-                                    },
-                                    {
-                                        model: "class",
-                                        type: "input",
-                                        inputType: "text",
-                                        label: "Class",
-                                    },
-                                ]
-                            },
-                            advanced: {
-                                label: 'Advanced',
-                                fields: [
-                                    {
-                                        model: "placeholder",
-                                        type: "input",
-                                        inputType: "text",
-                                        label: "Placeholder",
-                                    },
-                                    {
-                                        model: "maxlength",
-                                        type: "input",
-                                        inputType: "number",
-                                        label: "Maxlength"
-                                    }
-                                ]
                             }
                         }
                     },
@@ -241,67 +88,16 @@ var neoforms_form_type_data = {
                             placeholder: '',
                             maxlength: '',
                             value: '',
+                            has_relation: false,
+                            relation: [{
+                                field: '',
+                                value : '',
+                                relation_type: 'and'
+                            }],
                         },
                         settings:{
                             atts: {
                                 span: 24
-                            }
-                        },
-                        schema:{
-                            general: {
-                                label: 'General',
-                                fields: [
-                                    {
-                                        model: 'required',
-                                        type : 'input',
-                                        inputType : 'checkbox',
-                                        label : 'Required',
-                                        options : {
-                                            true : 'Required',
-                                        }
-                                    },
-                                    {
-                                        model: "name",
-                                        type: "input",
-                                        inputType: "text",
-                                        label: "Field Name",
-                                    },
-                                    {
-                                        model: "label",
-                                        type: "input",
-                                        inputType: "text",
-                                        label: "Label",
-                                    },
-                                    {
-                                        model: "id",
-                                        type: "input",
-                                        inputType: "text",
-                                        label: "Id",
-                                    },
-                                    {
-                                        model: "class",
-                                        type: "input",
-                                        inputType: "text",
-                                        label: "Class",
-                                    },
-                                ]
-                            },
-                            advanced: {
-                                label: 'Advanced',
-                                fields: [
-                                    {
-                                        model: "placeholder",
-                                        type: "input",
-                                        inputType: "text",
-                                        label: "Placeholder",
-                                    },
-                                    {
-                                        model: "maxlength",
-                                        type: "input",
-                                        inputType: "number",
-                                        label: "Maxlength"
-                                    }
-                                ]
                             }
                         }
                     },
@@ -325,69 +121,13 @@ var neoforms_form_type_data = {
                             class: '',
                             placeholder: '',
                             maxlength: '',
-                            value: ''
-                        },
-                        schema:{
-                            general: {
-                                label: 'General',
-                                fields: [
-                                    {
-                                        model: 'required',
-                                        type : 'input',
-                                        inputType : 'checkbox',
-                                        label : 'Required',
-                                        options : {
-                                            true : 'Required',
-                                        }
-                                    },
-                                    {
-                                        model: "name",
-                                        type: "input",
-                                        inputType: "text",
-                                        label: "Field Name",
-                                    },
-                                    {
-                                        model: "label",
-                                        type: "input",
-                                        inputType: "text",
-                                        label: "Label",
-                                    },
-                                    {
-                                        model: "id",
-                                        type: "input",
-                                        inputType: "text",
-                                        label: "Id",
-                                    },
-                                    {
-                                        model: "class",
-                                        type: "input",
-                                        inputType: "text",
-                                        label: "Class",
-                                    },
-                                    {
-                                        model: "value",
-                                        type: "textarea",
-                                        label: "Default Text",
-                                    },
-                                ]
-                            },
-                            advanced: {
-                                label: 'Advanced',
-                                fields: [
-                                    {
-                                        model: "placeholder",
-                                        type: "input",
-                                        inputType: "text",
-                                        label: "Placeholder",
-                                    },
-                                    {
-                                        model: "maxlength",
-                                        type: "input",
-                                        inputType: "number",
-                                        label: "Maxlength",
-                                    }
-                                ]
-                            }
+                            value: '',
+                            has_relation: false,
+                            relation: [{
+                                field: '',
+                                value : '',
+                                relation_type: 'and'
+                            }],
                         }
                     }
                 ]

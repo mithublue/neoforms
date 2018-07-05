@@ -7,7 +7,6 @@ visual contact form, registration form, registration form builder, wp registrati
 fast form, fast form builder, easy form, easy form builder, no code form, best form, best form builder, wp best form, wp best form builder
 wp formbuilder, form builder, wp form builder, support form, registration form, report form, bug form, recommendation form, leave application, comment form, online booking,
 event registration
-
 Requires at least: 3.0.1
 Tested up to: 4.9.7
 Stable tag: 1.0

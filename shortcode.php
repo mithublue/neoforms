@@ -330,7 +330,7 @@ class NeoForms_Shortcode_Handler {
 new NeoForms_Shortcode_Handler();
 
 //test
-add_action( 'init', function () {
+add_action( 'init', function () { return;
     if( isset( $_POST['neoforms_submit'] ) ) {
         neoforms_pri($_POST);
         $submission = new Neoforms_Submission_Process($_POST);

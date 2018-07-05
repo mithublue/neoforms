@@ -1,7 +1,7 @@
 <?php
 /*
  * Plugin Name: neoForms
- * Description: A plugin to build forms in fastest and easiest way.
+ * Description: Best, Fastest, Easiest Multipurpose Form Plugin for Wordpress.
  * Plugin URI:
  * Author URI:
  * Author: CyberCraft

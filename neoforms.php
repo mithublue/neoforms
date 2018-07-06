@@ -40,8 +40,17 @@ Class NeoForms_Init {
 
     public function __construct() {
         add_action( 'init', array( $this, 'register_post_type' ) );
+	    add_filter( 'plugin_action_links_' . plugin_basename(__FILE__), array( $this, 'action_links' ) );
         $this->includes();
     }
+
+	public function action_links($links) {
+		$links[] = '<a href="https://cybercraftit.com/contact/" target="_blank">'.__( 'Ask for Modification', 'wauc' ).'</a>';
+		if( ! NeoForms_Functions::is_pro() ) {
+			$links[] = '<a href="https://cybercraftit.com/neoforms-pro/" style="color: #fa0000;" target="_blank">'.__( 'Upgrade to Pro', 'wauc' ).'</a>';
+		}
+		return $links;
+	}
 
     public function includes() {
         include_once 'ajax-actions.php';

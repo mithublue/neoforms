@@ -9,7 +9,8 @@ var neoforms_routes = [
     {path: '/settings', component: neoforms_settings},
     {path: '/forms/entries/:form_type', component: neoforms_entries},
     {path: '/forms/entries/:form_type/:status/page/:page', component: neoforms_entries},
-    {path: '/forms/entries/:form_type/view/:id', component: neoforms_entry}
+    {path: '/forms/entries/:form_type/view/:id', component: neoforms_entry},
+    {path: '/help', component: neoforms_help}
 ];
 
 neoforms_routes = neo_apply_filters( 'neoforms_routes', neoforms_routes );

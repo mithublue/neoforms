@@ -43,6 +43,8 @@ class NeoForms_Admin {
             $submenu['neoforms'][] = array( __( 'Settings', 'neoforms' ), 'manage_options', 'admin.php?page=neoforms#/settings' );
         }
 
+	    $submenu['neoforms'][] = array( __( 'Help', 'neoforms' ), 'manage_options', 'admin.php?page=neoforms#/help' );
+
         add_action( 'load-'. $hook, array( $this, 'load_scripts' ) );
     }
 

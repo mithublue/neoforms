@@ -216,6 +216,15 @@
 .hov_dis_none:hover {
   display: none;
 }
+.text_center{
+  text-align: center;
+}
+.text_right{
+  text-align: right;
+}
+.text_left{
+  text-align: left;
+}
 /******position*****/
 .r-15 {
   right: -15px;

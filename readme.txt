@@ -15,6 +15,15 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Now you can build form in easiest, simplest and fastest ever way however you want without coding.
 
+
+== Demo ==
+
+[Visit the demo](http://cybercraftit.com/demo/testwp/neoforms/demo)
+
+== Documentation ==
+
+[User DOcumentation to get how to use neoForms](http://docs.cybercraftit.com/docs/neoforms-user-documentation/)
+
 == Description ==
 
 This plugin is to let you build any type of form however you want in fastest and easiesy way. It lets you create form in less than a minute and more effectively.

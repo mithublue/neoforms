@@ -447,7 +447,7 @@
         <a href="javascript:" @click="clone_col()"><?php _e( 'Clone Field'); ?></a>
         <a href="javascript:" @click="copy_col()"><?php _e( 'Copy Field'); ?></a>
         <a href="javascript:" @click="remove_field()">Remove</a>
-        <a href="javascript:" class="neo_col_mover" title="<?php _e( 'Move Field'); ?>"><i class="el-icon-more"></i></a>
+        <a href="javascript:" class="neo_col_mover" title="<?php _e( 'Move Field'); ?>"><i class="el-icon el-icon-d-caret"></i></a>
         <div v-if="open_settings" class="neoforms-field-settings-panel">
             <div class="neoforms_center mb5">
                 <a href="javascript:" class="neoforms_btn-flat" @click="open_settings = false;unset_edit_mode();"><?php _e( 'Save', 'neoforms' ); ?></a>
@@ -552,7 +552,7 @@
         <a href="javascript:" v-if="copied_row" @click="paste_row()"><?php _e( 'Paste Placeholder', 'neoforms' ); ?></a>
         <a href="javascript:" v-if="copied_col" @click="paste_col()"><?php _e( 'Paste Field', 'neoforms' ); ?></a>
         <a href="javascript:" @click="remove_row(target_row)" title="Remove row"><i class="el-icon-delete"></i> <?php _e( 'Remove Placeholder', 'neoforms' ); ?></a>
-        <a href="javascript:" class="neo_row_mover" title="<?php _e( 'Move Placeholder'); ?>"><i class="el-icon-more"></i></a>
+        <a href="javascript:" class="neo_row_mover" title="<?php _e( 'Move Placeholder'); ?>" title="<?php _e( 'Sort', 'neoforms' ); ?>"><i class="el-icon-d-caret"></i></a>
         <neoforms_field_list :target_row="target_row"></neoforms_field_list>
     </div>
 </template>
@@ -622,9 +622,6 @@
 </script>
 <template id="neoforms_field_list">
     <div class="field-panel-list" v-if="is_show_field_list == true">
-        <div class="oh">
-            <a href="javascript:" @click="hide_field_list();unset_edit_mode();"><i class="el-icon-close"></i></a>
-        </div>
         <el-card class="box-card">
             <ul class="oh">
                 <li v-for="(field,k) in formFields">
@@ -633,6 +630,11 @@
                     </el-button>
                     <el-button v-else :disabled="true">
                         {{ field.preview.label }} (Pro)
+                    </el-button>
+                </li>
+                <li>
+                    <el-button href="javascript:" @click="hide_field_list();unset_edit_mode();" class="field-panel-list-close">
+                        <i class="el-icon-close"></i>
                     </el-button>
                 </li>
             </ul>

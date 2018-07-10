@@ -11,70 +11,77 @@
                               show-icon>
                     </el-alert>
                 </div>
-                <div class="oh mb20 oh">
-                    <div class="mb20 alignright">
-                        <a href="javascript:" @click="update_form('draft')" class="button button-default"><?php _e( 'Save as Draft', 'neoforms' ); ?></a>
-                        <a v-if="!form_id || form.post_status !== 'publish'" href="javascript:" @click="update_form('publish')" class="button button-primary"><?php _e( 'Publish', 'neoforms' ); ?></a>
-                        <a v-if="form_id && form.post_status == 'publish'" href="javascript:" @click="update_form('publish')" class="button button-primary"><?php _e( 'Update', 'neoforms' ); ?></a>
-                        <a @click="delete_form(1)" href="javascript:" class="el-button el-button--mini el-button--danger"><i class="el-icon el-icon-delete"></i> <?php _e('Move to Trash','neoforms'); ?></a>
-                    </div>
-                    <div>
-                        <h5 class="mb10 mt0"><?php _e( 'Form Title', 'neoforms' ); ?></h5>
-                        <el-input type="text" v-model="form.post_title"></el-input>
-                    </div>
-                </div>
-                <el-tabs type="border-card">
-                    <el-tab-pane label="<?php _e( 'Form Builder', 'neoforms' ); ?>">
-                        <div class="neoforms_form_builder_panel">
-                            <template v-if="form_settings.form_settings.s.is_multistep">
-                                <template v-if="is_plainform_data_exist">
-                                    <el-card>
-                                        <h5 class="mt5"><?php _e( 'There are some fields previously creted. Do you want to import them in multi step form '); ?></h5>
-                                        <a @click="import_fields('plain','multi')" href="javascript:" class="el-button el-button--mini"><?php _e( 'Yes, Import All Fields'); ?></a>
-                                        <a @click="delete_fields()" href="javascript:" class="el-button el-button--mini"><?php _e( 'No, Delete Previous Fields'); ?></a>
-                                    </el-card>
-                                </template>
-                            </template>
-                            <template v-if="!form_settings.form_settings.s.is_multistep">
-                                <template v-if="is_multistep_data_exist">
-                                    <el-card>
-                                        <h5><?php _e( 'There are some fields previously creted. Do you want to import them in plain form '); ?></h5>
-                                        <a @click="import_fields('multi','plain')" href="javascript:" class="el-button el-button--mini"><?php _e( 'Yes, Import All Fields'); ?></a>
-                                        <a @click="delete_fields()" href="javascript:" class="el-button el-button--mini"><?php _e( 'No, Delete Previous Fields'); ?></a>
-                                    </el-card>
-                                </template>
-                            </template>
-                            <neoforms_new_form_root></neoforms_new_form_root>
+                <el-row>
+                    <el-col :sm="18">
+                        <div class="oh mb20 oh">
+                            <div>
+                                <h5 class="mb10 mt0"><?php _e( 'Form Title', 'neoforms' ); ?></h5>
+                                <el-input type="text" v-model="form.post_title"></el-input>
+                            </div>
                         </div>
-                    </el-tab-pane>
-                    <el-tab-pane label="<?php _e( 'Settings', 'neoforms' ); ?>">
-                        <?php $pages = get_pages();
-                        $neoform_pages = array();
-                        foreach( $pages as $k => $each ) {
-                            $neoform_pages[$each->ID] = $each->post_title;
-                        }
-                        $neoform_pages = base64_encode(json_encode($neoform_pages));
+                        <el-tabs type="border-card">
+                            <el-tab-pane label="<?php _e( 'Form Builder', 'neoforms' ); ?>">
+                                <div class="neoforms_form_builder_panel">
+                                    <template v-if="form_settings.form_settings.s.is_multistep">
+                                        <template v-if="is_plainform_data_exist">
+                                            <el-card>
+                                                <h5 class="mt5"><?php _e( 'There are some fields previously creted. Do you want to import them in multi step form '); ?></h5>
+                                                <a @click="import_fields('plain','multi')" href="javascript:" class="el-button el-button--mini"><?php _e( 'Yes, Import All Fields'); ?></a>
+                                                <a @click="delete_fields()" href="javascript:" class="el-button el-button--mini"><?php _e( 'No, Delete Previous Fields'); ?></a>
+                                            </el-card>
+                                        </template>
+                                    </template>
+                                    <template v-if="!form_settings.form_settings.s.is_multistep">
+                                        <template v-if="is_multistep_data_exist">
+                                            <el-card>
+                                                <h5><?php _e( 'There are some fields previously creted. Do you want to import them in plain form '); ?></h5>
+                                                <a @click="import_fields('multi','plain')" href="javascript:" class="el-button el-button--mini"><?php _e( 'Yes, Import All Fields'); ?></a>
+                                                <a @click="delete_fields()" href="javascript:" class="el-button el-button--mini"><?php _e( 'No, Delete Previous Fields'); ?></a>
+                                            </el-card>
+                                        </template>
+                                    </template>
+                                    <neoforms_new_form_root></neoforms_new_form_root>
+                                </div>
+                            </el-tab-pane>
+                            <el-tab-pane label="<?php _e( 'Settings', 'neoforms' ); ?>">
+			                    <?php $pages = get_pages();
+			                    $neoform_pages = array();
+			                    foreach( $pages as $k => $each ) {
+				                    $neoform_pages[$each->ID] = $each->post_title;
+			                    }
+			                    $neoform_pages = base64_encode(json_encode($neoform_pages));
 
-                        $roles = get_editable_roles();
-                        $all_roles = array();
-                        foreach ( $roles as $name => $role ) {
-                            $all_roles[$name] = $role['name'];
-                        }
-                        $all_roles = base64_encode(json_encode($all_roles)); ?>
-                        <el-tabs tab-position="left">
-                            <template v-for="(settings,settings_key) in form_settings">
-                                <el-tab-pane :label="settings.label"  v-if="!settings.for">
-                                    <vue_form_builder :model="settings.s" :schema="settings.schema.fields"></vue_form_builder>
-                                </el-tab-pane>
-                            </template>
-                            <template v-for="(settings,settings_key) in form_settings">
-                                <el-tab-pane :label="settings.label" v-if="form_settings.form_settings.s.form_type == settings.for">
-                                    <vue_form_builder :model="settings.s" :schema="settings.schema.fields"></vue_form_builder>
-                                </el-tab-pane>
-                            </template>
+			                    $roles = get_editable_roles();
+			                    $all_roles = array();
+			                    foreach ( $roles as $name => $role ) {
+				                    $all_roles[$name] = $role['name'];
+			                    }
+			                    $all_roles = base64_encode(json_encode($all_roles)); ?>
+                                <el-tabs tab-position="left">
+                                    <template v-for="(settings,settings_key) in form_settings">
+                                        <el-tab-pane :label="settings.label"  v-if="!settings.for">
+                                            <vue_form_builder :model="settings.s" :schema="settings.schema.fields"></vue_form_builder>
+                                        </el-tab-pane>
+                                    </template>
+                                    <template v-for="(settings,settings_key) in form_settings">
+                                        <el-tab-pane :label="settings.label" v-if="form_settings.form_settings.s.form_type == settings.for">
+                                            <vue_form_builder :model="settings.s" :schema="settings.schema.fields"></vue_form_builder>
+                                        </el-tab-pane>
+                                    </template>
+                                </el-tabs>
+                            </el-tab-pane>
                         </el-tabs>
-                    </el-tab-pane>
-                </el-tabs>
+                    </el-col>
+                    <el-col :sm="6">
+                        <div class="mb20 alignright">
+                            <a href="javascript:" @click="update_form('draft')" class="button button-default"><?php _e( 'Save as Draft', 'neoforms' ); ?></a>
+                            <a v-if="!form_id || form.post_status !== 'publish'" href="javascript:" @click="update_form('publish')" class="button button-primary"><?php _e( 'Publish', 'neoforms' ); ?></a>
+                            <a v-if="form_id && form.post_status == 'publish'" href="javascript:" @click="update_form('publish')" class="button button-primary"><?php _e( 'Update', 'neoforms' ); ?></a>
+                            <a @click="delete_form(1)" href="javascript:" class="el-button el-button--mini el-button--danger"><i class="el-icon el-icon-delete"></i> <?php _e('Move to Trash','neoforms'); ?></a>
+                        </div>
+
+                    </el-col>
+                </el-row>
             </div>
         </el-col>
     </el-row>

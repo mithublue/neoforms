@@ -1,263 +1,254 @@
-.field-panel{
-    position: absolute;
-    right: 0;
-    left:0;
-    bottom: -10px;
-    text-align: center;
-    margin: 10px 0;
+.field-panel {
+  position: absolute;
+  right: 0;
+  left: 0;
+  bottom: -10px;
+  text-align: center;
+  margin: 10px 0;
 }
-.row-panel a,.field-panel a{
-    border: 1px solid #ccc;
-    padding: 10px 14px;
-    text-decoration: none;
-    color: #111;
-    display: inline-block;
-    margin-bottom: 5px;
-    border-radius: 0;
-    margin-left: -5px;
-    background: #ffffff;
+.row-panel a,
+.field-panel a {
+  border: 1px solid #ccc;
+  padding: 10px 14px;
+  text-decoration: none;
+  color: #111;
+  display: inline-block;
+  margin-bottom: 5px;
+  border-radius: 0;
+  margin-left: -5px;
+  background: #ffffff;
 }
-.neoforms_btn-add_row{
-    border: 1px solid #ccc;
-    padding:10px 14px;
-    text-decoration: none;
-    color: #111;
-    border-radius: 3px;
-    display: inline-block;
-    margin-bottom: 5px;
+.row-panel a:hover,
+.field-panel a:hover {
+  background: #cccccc;
+  color: #ffffff;
 }
-.neoforms_btn-add_tab{
-    border: 1px solid #ccc;
-    padding: 5px 14px;
-    text-decoration: none;
-    color: #111;
-    border-radius: 3px;
-    display: inline-block;
-    margin-bottom: 5px;
+.neoforms_btn-add_row {
+  border: 1px solid #ccc;
+  padding: 10px 14px;
+  text-decoration: none;
+  color: #111;
+  border-radius: 3px;
+  display: inline-block;
+  margin-bottom: 5px;
 }
-.neoforms_center{
-    text-align: center;
+.neoforms_btn-add_tab {
+  border: 1px solid #ccc;
+  padding: 5px 14px;
+  text-decoration: none;
+  color: #111;
+  border-radius: 3px;
+  display: inline-block;
+  margin-bottom: 5px;
 }
-.neoforms_btn-flat{
-    border: 1px solid #ccc;
-    padding: 5px 14px;
-    text-decoration: none;
-    color: #111;
-    border-radius: 3px;
-    display: inline-block;
+.neoforms_center {
+  text-align: center;
 }
-.neoforms_left{
-    text-align: right;
+.neoforms_btn-flat {
+  border: 1px solid #ccc;
+  padding: 5px 14px;
+  text-decoration: none;
+  color: #111;
+  border-radius: 3px;
+  display: inline-block;
 }
-.neoforms_right{
-    text-align: right;
+.neoforms_left {
+  text-align: right;
 }
-.neoforms_dib{
-    display: inline-block;
+.neoforms_right {
+  text-align: right;
 }
-.neoforms_db{
-    display: block;
+.neoforms_dib {
+  display: inline-block;
 }
-.field-panel a:hover{
-    background: #cccccc;
-    color: #ffffff;
+.neoforms_db {
+  display: block;
 }
-.field-panel-list{
-    position: absolute;
-    z-index: 9999999;
-    padding: 5px;
-    right: 0;
-    left: 0;
+.field-panel-list {
+  position: absolute;
+  z-index: 9999999;
+  padding: 5px;
+  right: 0;
+  left: 0;
 }
-.field-panel-list a{
-    position: absolute;
-    right:5px;
+.field-panel-list a {
+  position: absolute;
+  right: 5px;
 }
-.field-panel-list ul{
-    margin:0;
-    padding:0;
+.field-panel-list ul {
+  margin: 0;
+  padding: 0;
 }
 .field-panel-list li {
-    list-style: none;
-    float: left;
-    /*border: 1px solid #ddd;*/
-    margin: 2px;
-    cursor: pointer;
-    text-align: center;
-    /*padding: 5px 10px;*/
-    /*border-radius: 3px;*/
+  list-style: none;
+  float: left;
+  /*border: 1px solid #ddd;*/
+  margin-bottom: 0;
+  margin: 0;
+  cursor: pointer;
+  text-align: center;
+  /*padding: 5px 10px;*/
+  /*border-radius: 3px;*/
 }
-.field-panel-list li{
-    margin-bottom:0;
-    margin: 0;
+.field-panel-list li button {
+  border-radius: 0;
+  background: #015395;
+  color: #FFFFFF;
 }
-.field-panel-list li button{
-    -webkit-border-radius: 0;
-    -moz-border-radius: 0;
-    border-radius: 0;
-    background: #015395;
-    color: #FFFFFF;
+.field-panel-list li .field-panel-list-close:hover {
+  background: #d71a1a;
+  color: #FFFFFF;
 }
-.field-panel-list li .field-panel-list-close:hover{
-    background: #d71a1a;
-    color: #FFFFFF;
+.field-panel-list li:hover {
+  /*background: #cccccc;
+            color: #ffffff;*/
 }
-.field-panel-list li:hover{
-    /*background: #cccccc;
-    color: #ffffff;*/
-}
-.el-button{
-    text-decoration: none;
+.el-button {
+  text-decoration: none;
 }
 /*** Edit ***/
-.neoforms_form_builder_panel{
-    padding-bottom: 500px;
+.neoforms_form_builder_panel {
+  padding-bottom: 500px;
 }
-.neoforms-edit-mode{
-    position: relative;
-    z-index:0;
+.neoforms-edit-mode {
+  position: relative;
+  z-index: 0;
 }
-.neoforms-edit-mode .focused_row{
-    border: 1px solid #CCCCCC;
-    margin-bottom: 10px;
+.neoforms-edit-mode .focused_row {
+  border: 1px solid #CCCCCC;
+  margin-bottom: 10px;
 }
-.neoforms-edit-mode .el-row{
-
+.neoforms-edit-mode .focused_row .el-row {
+  padding: 5px;
+  min-height: 50px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding-bottom: 50px;
 }
-.neoforms-edit-mode .focused_row .el-row{
-    padding: 5px;
-    min-height:50px;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    padding-bottom: 50px;
+.neoforms-edit-mode .focused_row .input-col {
+  position: relative;
+  z-index: 999999;
 }
-.neoforms-edit-mode .focused_row .input-col{
-    position: relative;
-    z-index:999999;
+.neoforms-edit-mode .focused_row .input-col a {
+  text-decoration: none;
+  padding: 5px 11px;
+  background: #333;
+  color: #fff;
 }
-.neoforms-edit-mode .input-col a{
-    text-decoration: none;
-    padding: 5px 11px;
-    background: #333;
-    color: #fff;
+.neoforms_input_panel {
+  position: absolute;
+  text-align: center;
+  right: 0;
+  left: 0;
+  bottom: -15px;
 }
-.neoforms_input_panel{
-    position: absolute;
-    text-align: center;
-    right: 0;
-    left: 0;
-    bottom: -15px;
+.neoforms_input_panel a {
+  /*padding: 5px 15px;*/
+  display: inline;
+  border-radius: 0;
+  margin-left: -3px;
 }
-.neoforms_input_panel a{
-    /*padding: 5px 15px;*/
-    display: inline;
-    border-radius: 0;
-    margin-left:-3px;
+.neoforms_input_panel .neoforms_grid_panel {
+  position: absolute;
+  right: 0;
+  left: 0;
+  bottom: -20px;
+  background: #ffffff;
+  padding: 5px;
+  border: 1px solid #ddd;
+  display: inline;
+  text-align: center;
 }
-.neoforms_input_panel .neoforms_grid_panel{
-    position: absolute;
-    text-align: center;
-    right: 0;
-    left: 0;
-    bottom: -20px;
-    background: #ffffff;
-    padding: 5px;
-    border: 1px solid #ddd;
-    display: inline;
-    text-align: center;
-}
-.neoforms_input_panel .neoforms_grid_panel a{
-    padding: 5px 10px;
-    display: inline-block;
-    margin: 2px;
-    border: 1px solid #dddddd;
+.neoforms_input_panel .neoforms_grid_panel a {
+  padding: 5px 10px;
+  display: inline-block;
+  margin: 2px;
+  border: 1px solid #dddddd;
 }
 /**custom**/
 .neo_entry_single_view table {
-    border-collapse: collapse;
-    border-spacing: 0;
-    width: 100% !important;
-    border: 1px solid #ddd !important;
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100% !important;
+  border: 1px solid #ddd !important;
 }
-
-.neo_entry_single_view th, .neo_entry_single_view td {
-    text-align: left;
-    padding: 16px;
+.neo_entry_single_view th,
+.neo_entry_single_view td {
+  text-align: left;
+  padding: 16px;
 }
-
 .neo_entry_single_view tr:nth-child(even) {
-    background-color: #f2f2f2
+  background-color: #f2f2f2;
 }
-
-.neo_form_type h4{
-    margin-bottom: 10px;
+.neo_form_type h4 {
+  margin-bottom: 10px;
 }
-.neo_form_type h5{
-    margin-top: 0px;
-    margin-bottom: 20px;
+.neo_form_type h5 {
+  margin-top: 0px;
+  margin-bottom: 20px;
 }
-.neoforms-field-settings-panel{
-    text-align: left;
-    position: absolute;
-    right: 0;
-    left: 0;
-    padding: 10px;
-    overflow: hidden;
-    margin-top: 5px;
+.neoforms-field-settings-panel {
+  text-align: left;
+  position: absolute;
+  right: 0;
+  left: 0;
+  padding: 10px;
+  overflow: hidden;
+  margin-top: 5px;
 }
-.neoforms-field-settings-panel .el-form-item{
-    margin-bottom: 0;
+.neoforms-field-settings-panel .el-form-item {
+  margin-bottom: 0;
 }
-.neoforms-field-settings-panel .neoforms-field-settings-action{
-    text-align: right;
-    display: block;
+.neoforms-field-settings-panel .neoforms-field-settings-action {
+  text-align: right;
+  display: block;
 }
-.neoforms-field-settings-panel .el-form-item__content{
-    padding-right: 5px;
+.neoforms-field-settings-panel .el-form-item__content {
+  padding-right: 5px;
 }
-.neoforms_tab-panel{
-    width: 500px;
-    position: absolute;
-    z-index: 999999;
-    left: 33%;
+.neoforms_tab-panel {
+  width: 500px;
+  position: absolute;
+  z-index: 999999;
+  left: 33%;
 }
-.cc-edit-panel{
-    max-height: 400px;
-    overflow-y: scroll;
+.cc-edit-panel {
+  max-height: 400px;
+  overflow-y: scroll;
 }
-.cc-edit-panel .el-col-24{
-    margin-bottom:20px;
-    padding: 0 10px;
+.cc-edit-panel .el-col-24 {
+  margin-bottom: 20px;
+  padding: 0 10px;
 }
-.cc-edit-panel .el-input__inner{
-    margin-top: 10px;
+.cc-edit-panel .el-input__inner {
+  margin-top: 10px;
 }
-.cc-edit-panel .el-row{
-    padding: 0;
-    min-height: auto;
-    margin-top: 0;
-    margin-bottom: 0;
+.cc-edit-panel .el-row {
+  padding: 0;
+  min-height: auto;
+  margin-top: 0;
+  margin-bottom: 0;
 }
-.panel-repeatable{
-    border:1px solid #dddddd;
-    padding:5px;
+.panel-repeatable {
+  border: 1px solid #dddddd;
+  padding: 5px;
 }
-.neoforms-menu a{
-    text-decoration: none;
+.neoforms-menu a {
+  text-decoration: none;
 }
-.neoforms-menu .is-active{
-    background: #409EFF !important;
-    color: #ffffff !important;
+.neoforms-menu .is-active {
+  background: #409EFF !important;
+  color: #ffffff !important;
 }
-.pro_fields{
-    border: 1px solid #cc0000;
-    padding: 5px;
-    color: #cc0000;
-    padding: 8px 10px !important;
-    border-radius: 5px;
+.pro_fields {
+  border: 1px solid #cc0000;
+  padding: 5px;
+  color: #cc0000;
+  padding: 8px 10px !important;
+  border-radius: 5px;
 }
-.pro_fields p.description{
-    color: #cc0000;
+.pro_fields p.description {
+  color: #cc0000;
 }
 /*common*/
 .neoforms_layout_cornered input[type="text"],
@@ -275,14 +266,86 @@
 .neoforms_layout_cornered input[type="datetime"],
 .neoforms_layout_cornered input[type="datetime-local"],
 .neoforms_layout_cornered input[type="color"],
-.neoforms_layout_cornered textarea{
-    -webkit-border-radius: 0px;
-    -moz-border-radius: 0px;
-    border-radius: 0px;
+.neoforms_layout_cornered textarea {
+  border-radius: 0px;
 }
-.active_col_btn{
-    background: #fff !important;
-    color: #000 !important;
-    border: 2px solid #000 !important;
+.active_col_btn {
+  background: #fff !important;
+  color: #000 !important;
+  border: 2px solid #000 !important;
+}
+.neo_tabs .tabs {
+  background: #015395;
+}
+.neo_tabs .tabs a {
+  padding: 15px 10px;
+  display: block;
+  /*float: left;*/
+  text-align: center;
+  font-weight: bold;
+  font-size: 15px;
+  text-decoration: none;
+  color: #fff;
+}
+.neo_tabs .tabs a:hover {
+  background: #ecf5ff;
+  color: #3a8ee6;
+}
+.neo_tabs .tab_cotnent {
+  background: #FFFFFF;
+}
+.neo_element_tree .neo_tree_tab .neo_tree_tab_span {
+  display: block;
+  background: #555;
+  padding: 10px 10px;
+  color: #fff;
+}
+.neo_element_tree .neo_tree_tab .neo_tree_tab_span a {
+  text-decoration: none;
+  color: #FFFFFF;
+  border: 1px solid #FFFFFF;
+  padding: 0px 5px 2px 5px;
+  right: 10px;
+}
+.neo_element_tree .neo_tree_tab .neo_tree_placeholder {
+  margin-left: 10px;
+}
+.neo_element_tree .neo_tree_placeholder .neo_tree_placeholder_span {
+  display: block;
+  background: #555;
+  padding: 10px 10px;
+  color: #fff;
+  margin-top: 3px;
+}
+.neo_element_tree .neo_tree_placeholder .neo_tree_placeholder_span a {
+  text-decoration: none;
+  color: #FFFFFF;
+  border: 1px solid #FFFFFF;
+  padding: 0px 5px 2px 5px;
+  right: 10px;
+}
+.neo_element_tree li.neo_tree_field {
+  margin-left: 10px;
+}
+.neo_element_tree li.neo_tree_field .neo_tree_field_span {
+  border: 1px solid #015395;
+  display: block;
+  padding: 5px 10px;
+  margin-top: 3px;
+}
+.neo_element_tree li.neo_tree_field .neo_tree_field_span a {
+  text-decoration: none;
+  border: 1px solid #015395;
+  padding: 0px 5px 2px 5px;
+  right: 10px;
+}
+.neo_element_tree li.neo_tree_field .neo_tree_field_settings {
+  border: 1px solid #ccc;
+  padding: 0 10px;
+}
+.action_panel {
+  padding: 10px;
+  background: #fff;
 }
 
+/*# sourceMappingURL=style.css.map */

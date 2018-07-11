@@ -113,6 +113,9 @@ var store_obj = {
         }
     },
     getters: {
+        field_attr: function (state) {
+            return state.field_attr;
+        },
         notice: function (state) {
             return state.notice;
         },

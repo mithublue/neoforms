@@ -1,0 +1,23 @@
+{
+  "name": "neoforms",
+  "version": "1.0.0",
+  "description": "=== neoForms ===\r Contributors: cybercraftit, mithublue\r Tags: neoForms, neo, forms, contact, email, feedback, form, contact form, contact form builder, custom form, contact form plugin wp contact form, wp contact form builder, rating form, form generator, wp form generator, form maker, wp form maker, wp form, simple form,\r dynamic form, dynamic form builder, conditional form, condition form builder, wp condition, wp, wordpress form, wordpress form builder, wordpress contact form,\r drag and drop form, visual form, visual form builder, multistep form, multistep formbuilder, multistep form builder,\r visual contact form, registration form, registration form builder, wp registration, wp registration form builder, event form, event form builder,\r fast form, fast form builder, easy form, easy form builder, no code form, best form, best form builder, wp best form, wp best form builder\r wp formbuilder, form builder, wp form builder, support form, registration form, report form, bug form, recommendation form, leave application, comment form, online booking,\r event registration\r Requires at least: 3.0.1\r Tested up to: 4.9.7\r Stable tag: 1.0\r License: GPLv2 or later\r License URI: http://www.gnu.org/licenses/gpl-2.0.html",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mithublue/neoforms.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mithublue/neoforms/issues"
+  },
+  "homepage": "https://github.com/mithublue/neoforms#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "laravel-elixir": "^6.0.0-18"
+  }
+}

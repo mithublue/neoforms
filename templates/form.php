@@ -668,14 +668,14 @@
 <template id="neoforms_row_panel">
     <div class="row-panel pr">
         <a href="javascript:" @click="show_field_list();set_edit_mode();" v-if="!is_show_field_list"><i class="dashicons dashicons-plus-alt2"></i> <?php _e( 'Add Field', 'neoforms' ); ?></a>
-        <a href="javascript:" @click="hide_field_list();unset_edit_mode();" v-if="is_show_field_list"><i class="el-icon-close"></i> <?php _e( 'Close Panel', 'neoforms' ); ?></a>
+        <a href="javascript:" @click="hide_field_list();unset_edit_mode();" v-if="is_show_field_list"><i class="dashicons dashicons-no-alt"></i> <?php _e( 'Close Panel', 'neoforms' ); ?></a>
         <a href="javascript:" @click="add_row(target_row)" title="<?php _e( 'Add Placeholder', 'neoforms' ); ?>"><i class="dashicons dashicons-plus-alt"></i> <?php _e( 'Add Placeholder', 'neoforms' ); ?></a>
         <a href="javascript:" @click="clone_row(target_row)" title="<?php _e( 'Clone Placeholder', 'neoforms' ); ?>"><i class="dashicons dashicons-welcome-add-page"></i></a>
         <a href="javascript:" @click="copy_row()" title="<?php _e( 'Copy Placeholder', 'neoforms' ); ?>">
             <i class="dashicons dashicons-admin-page"></i>
         </a>
-        <a href="javascript:" v-if="copied_row" @click="paste_row()"><?php _e( 'Paste Placeholder', 'neoforms' ); ?></a>
-        <a href="javascript:" v-if="copied_col" @click="paste_col()"><?php _e( 'Paste Field', 'neoforms' ); ?></a>
+        <a href="javascript:" v-if="copied_row" @click="paste_row()"><i class="dashicons dashicons-category"></i> <?php _e( 'Paste Placeholder', 'neoforms' ); ?></a>
+        <a href="javascript:" v-if="copied_col" @click="paste_col()"><i class="dashicons dashicons-feedback"></i><?php _e( 'Paste Field', 'neoforms' ); ?></a>
         <a href="javascript:" @click="remove_row(target_row)" title="<?php _e( 'Remove Placeholder', 'neoforms' ); ?>"><i class="dashicons dashicons-trash"></i></a>
         <a href="javascript:" class="neo_row_mover" title="<?php _e( 'Move Placeholder'); ?>" title="<?php _e( 'Sort', 'neoforms' ); ?>"><i class="dashicons dashicons-move"></i></a>
         <neoforms_field_list :target_row="target_row"></neoforms_field_list>

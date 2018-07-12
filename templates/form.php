@@ -358,10 +358,12 @@
             <el-form ref="form" label-width="120px" method="post">
                 <div class="neoforms_db neoforms_center pr">
                     <template v-if="is_editing">
-                        <a href="javascript:" @click="add_row()" class="neoforms_btn-add_row" title="Add row"><i class="el-icon-circle-plus-outline"></i> <?php _e( 'Add Placeholder', 'neoforms' ); ?></a>
+                        <a href="javascript:" @click="add_row()" class="neoforms_btn-add_row" title="<?php _e( 'Add Placeholder', 'neoforms' ); ?>">
+                            <i class="dashicons dashicons-plus-alt"></i> <?php _e( 'Add Placeholder', 'neoforms' ); ?>
+                        </a>
                     </template>
-                    <a href="javascript:" @click="set_is_editing()" v-if="!is_editing" class="neoforms_btn-add_row" title="Add row"><i class="el-icon-edit-outline"></i> <?php _e( 'Edit', 'neoforms' ); ?></a>
-                    <a href="javascript:" @click="unset_is_editing()" v-if="is_editing" class="neoforms_btn-add_row" title="Add row"><i class="el-icon-view"></i> <?php _e( 'Preview', 'neoforms' ); ?></a>
+                    <a href="javascript:" @click="set_is_editing()" v-if="!is_editing" class="neoforms_btn-add_row" title="<?php _e( 'Edit', 'neoforms' ); ?>"><i class="dashicons dashicons-edit"></i> <?php _e( 'Edit', 'neoforms' ); ?></a>
+                    <a href="javascript:" @click="unset_is_editing()" v-if="is_editing" class="neoforms_btn-add_row" title="<?php _e( 'Preview', 'neoforms' ); ?>"><i class="dashicons dashicons-visibility"></i> <?php _e( 'Preview', 'neoforms' ); ?></a>
                     <?php do_action('neo_formbuilder_header'); ?>
                 </div>
                 <?php do_action('neo_before_formbuilder' ); ?>
@@ -553,12 +555,22 @@
 </script>
 <template id="neoforms_input_panel">
     <div class="neoforms_input_panel">
-        <a href="javascript:" @click="show_grids = true;set_edit_mode();"><?php _e( 'Resize', 'neoforms' ); ?></a>
-        <a href="javascript:" @click="open_settings = !open_settings;toggle_edit_mode();"><?php _e( 'Settings', 'neoforms' ); ?></a>
-        <a href="javascript:" @click="clone_col()"><?php _e( 'Clone Field'); ?></a>
-        <a href="javascript:" @click="copy_col()"><?php _e( 'Copy Field'); ?></a>
-        <a href="javascript:" @click="remove_field()"><?php _e( 'Remove', 'neoforms' ); ?></a>
-        <a href="javascript:" class="neo_col_mover" title="<?php _e( 'Move Field'); ?>"><i class="el-icon el-icon-d-caret"></i></a>
+        <a href="javascript:" @click="show_grids = true;set_edit_mode();" title="<?php _e( 'Resize', 'neoforms' ); ?>">
+            <i class="dashicons dashicons-leftright"></i>
+        </a>
+        <a href="javascript:" @click="open_settings = !open_settings;toggle_edit_mode();" title="<?php _e( 'Settings', 'neoforms' ); ?>">
+            <i class="dashicons dashicons-admin-generic"></i>
+        </a>
+        <a href="javascript:" @click="clone_col()" title="<?php _e( 'Clone Field'); ?>">
+            <i class="dashicons dashicons-welcome-add-page"></i>
+        </a>
+        <a href="javascript:" @click="copy_col()" title="<?php _e( 'Copy Field'); ?>">
+            <i class="dashicons dashicons-admin-page"></i>
+        </a>
+        <a href="javascript:" @click="remove_field()" title="<?php _e( 'Remove', 'neoforms' ); ?>">
+            <i class="dashicons dashicons-trash"></i>
+        </a>
+        <a href="javascript:" class="neo_col_mover" title="<?php _e( 'Move Field'); ?>"><i class="dashicons dashicons-move"></i></a>
         <div v-if="open_settings" class="neoforms-field-settings-panel">
             <div class="neoforms_center mb5">
                 <a href="javascript:" class="neoforms_btn-flat" @click="open_settings = false;unset_edit_mode();"><?php _e( 'Save', 'neoforms' ); ?></a>
@@ -655,15 +667,17 @@
 </script>
 <template id="neoforms_row_panel">
     <div class="row-panel pr">
-        <a href="javascript:" @click="show_field_list();set_edit_mode();" v-if="!is_show_field_list"><i class="el-icon-plus"></i> <?php _e( 'Add Field', 'neoforms' ); ?></a>
+        <a href="javascript:" @click="show_field_list();set_edit_mode();" v-if="!is_show_field_list"><i class="dashicons dashicons-plus-alt2"></i> <?php _e( 'Add Field', 'neoforms' ); ?></a>
         <a href="javascript:" @click="hide_field_list();unset_edit_mode();" v-if="is_show_field_list"><i class="el-icon-close"></i> <?php _e( 'Close Panel', 'neoforms' ); ?></a>
-        <a href="javascript:" @click="add_row(target_row)" title="Add row"><i class="el-icon-circle-plus-outline"></i> <?php _e( 'Add Placeholder', 'neoforms' ); ?></a>
-        <a href="javascript:" @click="clone_row(target_row)" title="Add row"><i class="el-icon-circle-plus"></i> <?php _e( 'Clone Placeholder', 'neoforms' ); ?></a>
-        <a href="javascript:" @click="copy_row()"><?php _e( 'Copy Placeholder', 'neoforms' ); ?></a>
+        <a href="javascript:" @click="add_row(target_row)" title="<?php _e( 'Add Placeholder', 'neoforms' ); ?>"><i class="dashicons dashicons-plus-alt"></i> <?php _e( 'Add Placeholder', 'neoforms' ); ?></a>
+        <a href="javascript:" @click="clone_row(target_row)" title="<?php _e( 'Clone Placeholder', 'neoforms' ); ?>"><i class="dashicons dashicons-welcome-add-page"></i></a>
+        <a href="javascript:" @click="copy_row()" title="<?php _e( 'Copy Placeholder', 'neoforms' ); ?>">
+            <i class="dashicons dashicons-admin-page"></i>
+        </a>
         <a href="javascript:" v-if="copied_row" @click="paste_row()"><?php _e( 'Paste Placeholder', 'neoforms' ); ?></a>
         <a href="javascript:" v-if="copied_col" @click="paste_col()"><?php _e( 'Paste Field', 'neoforms' ); ?></a>
-        <a href="javascript:" @click="remove_row(target_row)" title="Remove row"><i class="el-icon-delete"></i> <?php _e( 'Remove Placeholder', 'neoforms' ); ?></a>
-        <a href="javascript:" class="neo_row_mover" title="<?php _e( 'Move Placeholder'); ?>" title="<?php _e( 'Sort', 'neoforms' ); ?>"><i class="el-icon-d-caret"></i></a>
+        <a href="javascript:" @click="remove_row(target_row)" title="<?php _e( 'Remove Placeholder', 'neoforms' ); ?>"><i class="dashicons dashicons-trash"></i></a>
+        <a href="javascript:" class="neo_row_mover" title="<?php _e( 'Move Placeholder'); ?>" title="<?php _e( 'Sort', 'neoforms' ); ?>"><i class="dashicons dashicons-move"></i></a>
         <neoforms_field_list :target_row="target_row"></neoforms_field_list>
     </div>
 </template>

@@ -20,7 +20,7 @@
 }
 .row-panel a:hover,
 .field-panel a:hover {
-  background: #cccccc;
+  background: #015395;
   color: #ffffff;
 }
 .neoforms_btn-add_row {
@@ -83,10 +83,10 @@
   list-style: none;
   float: left;
   /*border: 1px solid #ddd;*/
-  margin-bottom: 0;
   margin: 0;
   cursor: pointer;
   text-align: center;
+  width: 20%;
   /*padding: 5px 10px;*/
   /*border-radius: 3px;*/
 }
@@ -94,6 +94,14 @@
   border-radius: 0;
   background: #015395;
   color: #FFFFFF;
+  word-wrap: break-word;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  display: block;
+  width: 100%;
+  /*border-radius: 0;
+            background: #015395;
+            color: #FFFFFF;*/
 }
 .field-panel-list li .field-panel-list-close:hover {
   background: #d71a1a;
@@ -141,6 +149,7 @@
   right: 0;
   left: 0;
   bottom: -15px;
+  z-index: 99999;
 }
 .neoforms_input_panel a {
   /*padding: 5px 15px;*/

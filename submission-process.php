@@ -160,6 +160,8 @@ class Neoforms_Submission_Process {
     }
 
     public function row_validation( $data ) {
+	    $postdata = $this->postdata;
+
 	    foreach ( $data['row_formdata'] as $k => $col_data ) {
 		    /**
 		     * Validation : Required

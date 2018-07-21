@@ -809,12 +809,16 @@ for ( var fieldname in field_attr ) {
 
                 var common_fields = neoforms_reset_fields(field_attr['common'].schema[tabname].fields);
                 if ( typeof field_attr[fieldname].schema[tabname].prevent !== 'undefined' ) {
-                    for ( var p in common_fields ) {
-                        if ( field_attr[fieldname].schema[tabname].prevent.indexOf( common_fields[p].model ) !== -1 ) {
-                            common_fields.splice( p, 1 );
+                    for ( k in field_attr[fieldname].schema[tabname].prevent ) {
+                        for ( var p in common_fields ) {
+                            if( common_fields[p].model == field_attr[fieldname].schema[tabname].prevent[k] ) {
+                                common_fields.splice( p, 1 );
+                                break;
+                            }
                         }
                     }
                 }
+
                 field_attr[fieldname].schema[tabname].fields = common_fields.concat(field_attr[fieldname].schema[tabname].fields);
             }
         }

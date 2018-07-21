@@ -116,7 +116,6 @@ var neoforms_form_settings = {
                 {
                     model: 'schedule_from',
                     type: 'datetimepicker',
-                    //inputType: '',
                     label: 'Schedule Start Date',
                     desc: 'The date when the form will be accessible from',
                     visible: function (model) {
@@ -125,8 +124,7 @@ var neoforms_form_settings = {
                 },
                 {
                     model: 'schedule_to',
-                    type: 'input',
-                    inputType: 'text',
+                    type: 'datetimepicker',
                     label: 'Schedule End Date',
                     desc: 'The date after when the form will not be accessible and submission will not be valid',
                     visible: function (model) {
@@ -136,8 +134,8 @@ var neoforms_form_settings = {
                 {
                     model: 'msg_before_schedule',
                     type: 'textarea',
-                    label: 'Message before Schedule',
-                    desc: 'Text that will be displayed if user visits the form page before schedule starts.',
+                    label: 'Message out of Schedule',
+                    desc: 'Text that will be displayed if user visits the form page before schedule starts or after schedule ends.',
                     visible: function (model) {
                         return model.is_scheduled;
                     }

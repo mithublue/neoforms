@@ -1,15 +1,16 @@
 === neoForms ===
 Contributors: cybercraftit, mithublue
-Tags: neoForms, neo, forms, contact, email, feedback, form, contact form, contact form builder, custom form, contact form plugin wp contact form, wp contact form builder, rating form, form generator, wp form generator, form maker, wp form maker, wp form, simple form,
+Tags: forms, form, contact form, registration form, wp contact form, wp form, wp forms, new form, form builder, report form, neoForms, neo, contact, email, feedback, form, contact form builder, custom form, contact form plugin, wp contact form builder, rating form, form generator, wp form generator, form maker, wp form maker, wp form, simple form,
 dynamic form, dynamic form builder, conditional form, condition form builder, wp condition, wp, wordpress form, wordpress form builder, wordpress contact form,
 drag and drop form, visual form, visual form builder, multistep form, multistep formbuilder, multistep form builder,
 visual contact form, registration form, registration form builder, wp registration, wp registration form builder, event form, event form builder,
 fast form, fast form builder, easy form, easy form builder, no code form, best form, best form builder, wp best form, wp best form builder
-wp formbuilder, form builder, wp form builder, support form, registration form, report form, bug form, recommendation form, leave application, comment form, online booking,
+wp formbuilder, form builder, wp form builder, support form,  bug form, recommendation form, leave application, comment form, online booking,
+neo form, neo forms
 event registration
 Requires at least: 3.0.1
 Tested up to: 4.9.7
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -74,4 +75,13 @@ It is designed to let you have the best and hassle free experience.
 
 1. Upload `neoforms` to the `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
+
+== Changelog ==
+
+= 1.0.2 =
+
+1. [fix] Issue with field settings fixed
+2. [fix] Issue with field settings fixed
+3. [new] Icon added
+4. [fix] text domain fix
 

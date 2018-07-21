@@ -28,7 +28,7 @@ class NeoForms_Admin {
         global $submenu;
 
         $capability = NeoForms_Functions::form_capability();
-        $hook = add_menu_page( __( 'neoForms - The Best and Fastest Form Builder Ever', 'neoforms' ), 'neoForms', $capability, 'neoforms', array( $this, 'neoforms_page') );
+        $hook = add_menu_page( __( 'neoForms - The Best and Fastest Form Builder Ever', 'neoforms' ), 'neoForms', $capability, 'neoforms', array( $this, 'neoforms_page'), NEOFORMS_ASSET_PATH.'/img/icon.png' );
 
         if ( current_user_can( $capability ) ) {
             $submenu['neoforms'][] = array( __( 'All Forms', 'neoforms' ), $capability, 'admin.php?page=neoforms#/' );

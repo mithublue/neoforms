@@ -810,4 +810,4 @@
         });
     });
 </script>
-<?php do_action('components_form_items' ); ?>
+<?php do_action('wpfront_components_form_items' ); ?>

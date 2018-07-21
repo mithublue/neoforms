@@ -142,40 +142,47 @@ class Neoforms_Submission_Process {
         $postdata = $this->postdata;
         $formdata = $this->formdata;
 
-        foreach ( $formdata['field_data'] as $k => $data ) {
-            if( $data['type'] == 'row' ) {
-                foreach ( $data['row_formdata'] as $k => $col_data ) {
-                    /**
-                     * Validation : Required
-                     */
-                    if( isset( $col_data['s']['required'] ) && $col_data['s']['required'] == true ) {
-                        /**
-                         * if data type if
-                         * file
-                         */
-                        //neoforms_pri($_FILES);
-                        if( $col_data['preview']['name'] == 'upload' ) {
-                            if( $_FILES[$col_data['s']['name']]['error'][0] ) {
-                                $this->set_error( ( isset( $col_data['s']['label'] ) ? $col_data['s']['label'] : $col_data['s']['name'] ) .' is Required ' );
-                            }
-                        } else {
-                            if( !isset( $postdata[$col_data['s']['name']] ) || empty( $postdata[$col_data['s']['name']] ) ) {
-                                $this->set_error( ( isset( $col_data['s']['label'] ) ? $col_data['s']['label'] : $col_data['s']['name'] ) .' is Required ' );
-                            }
-                        }
-
-
-                    }
-                }
-            } else {
-                do_action( 'neo_form_validate_data', $postdata, $formdata, $this );
-            }
-
+        if( !$this->form_settings['form_settings']['s']['is_multistep'] ) {
+	        foreach ( $formdata['field_data'] as $k => $data ) {
+		        if( $data['type'] == 'row' ) {
+			        $this->row_validation($data);
+		        }
+	        }
+        } else {
+	        do_action( 'neo_form_validate_data', $postdata, $formdata, $this );
         }
+
+
 
         if( empty( $this->get_errors() ) )
             return true;
         return false;
+    }
+
+    public function row_validation( $data ) {
+	    foreach ( $data['row_formdata'] as $k => $col_data ) {
+		    /**
+		     * Validation : Required
+		     */
+		    if( isset( $col_data['s']['required'] ) && $col_data['s']['required'] == true ) {
+			    /**
+			     * if data type if
+			     * file
+			     */
+			    //neoforms_pri($_FILES);
+			    if( $col_data['preview']['name'] == 'upload' ) {
+				    if( $_FILES[$col_data['s']['name']]['error'][0] ) {
+					    $this->set_error( ( isset( $col_data['s']['label'] ) ? $col_data['s']['label'] : $col_data['s']['name'] ) .' is Required ' );
+				    }
+			    } else {
+				    if( !isset( $postdata[$col_data['s']['name']] ) || empty( $postdata[$col_data['s']['name']] ) ) {
+					    $this->set_error( ( isset( $col_data['s']['label'] ) ? $col_data['s']['label'] : $col_data['s']['name'] ) .' is Required ' );
+				    }
+			    }
+
+
+		    }
+	    }
     }
 
     /**

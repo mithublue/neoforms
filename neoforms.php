@@ -3,11 +3,11 @@
  * Plugin Name: neoForms
  * Description: Best, Fastest, Easiest Multipurpose Form Plugin for Wordpress.
  * Plugin URI:
- * Author URI:
+ * Author URI: https://cybercraftit.com/
  * Author: CyberCraft
- * Text Domain: wpfb
+ * Text Domain: neoforms
  * Domain Path: /languages
- * Version: 1.0.1
+ * Version: 1.0.2
  * License: GPL2
  */
 
@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-define( 'NEOFORMS_VERSION', '1.0.1' );
+define( 'NEOFORMS_VERSION', '1.0.2' );
 define( 'NEOFORMS_ROOT', dirname(__FILE__) );
 define( 'NEOFORMS_ASSET_PATH', plugins_url('assets',__FILE__) );
 define( 'NEOFORMS_BASE_FILE', __FILE__ );
@@ -45,9 +45,9 @@ Class NeoForms_Init {
     }
 
 	public function action_links($links) {
-		$links[] = '<a href="https://cybercraftit.com/contact/" target="_blank">'.__( 'Ask for Modification', 'wauc' ).'</a>';
+		$links[] = '<a href="https://cybercraftit.com/contact/" target="_blank">'.__( 'Ask for Modification', 'neoforms' ).'</a>';
 		if( ! NeoForms_Functions::is_pro() ) {
-			$links[] = '<a href="https://cybercraftit.com/neoforms-pro/" style="color: #fa0000;" target="_blank">'.__( 'Upgrade to Pro', 'wauc' ).'</a>';
+			$links[] = '<a href="https://cybercraftit.com/neoforms-pro/" style="color: #fa0000;" target="_blank">'.__( 'Upgrade to Pro', 'neoforms' ).'</a>';
 		}
 		return $links;
 	}

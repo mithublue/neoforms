@@ -19,7 +19,8 @@ Now you can build form in easiest, simplest and fastest ever way however you wan
 
 == Demo ==
 
-[Visit the demo](http://cybercraftit.com/demo/testwp/neoforms/demo)
+[Visit the demo](http://cybercraftit.com/demo/testwp/neoforms/demo) .
+There you will find 'neoForms' in admin menu from where you can create form of any type and use that in any post or page or any other post type. You will also have different settings there. Playing with those will let you be clear about the plugin.
 
 == Documentation ==
 
